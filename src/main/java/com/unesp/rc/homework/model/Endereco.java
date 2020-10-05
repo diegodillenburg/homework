@@ -10,5 +10,33 @@ package com.unesp.rc.homework.model;
  * @author Felipe
  */
 public class Endereco {
+    private Boolean principal;
+    
+    private String enderecoCompleto;
+    
+
+    public Endereco(Boolean principal, String enderecoCompleto, String usuario) {
+        this.principal = principal;
+        this.enderecoCompleto = enderecoCompleto;
+    }
+
+    public Boolean getPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(Boolean principal) {
+        this.principal = principal;
+    }
+
+    public String getEnderecoCompleto() {
+        return enderecoCompleto;
+    }
+
+    public void setEnderecoCompleto(String enderecoCompleto) {
+        this.enderecoCompleto = enderecoCompleto;
+    }
+
+
+    
     
 }
