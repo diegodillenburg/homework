@@ -19,7 +19,7 @@ public class Assignment {
     public Assignment() {
         super();
     }
-
+    
     public Assignment(Long id, String title, String description, String assignmentType) {
         super();
         this.id = id;
