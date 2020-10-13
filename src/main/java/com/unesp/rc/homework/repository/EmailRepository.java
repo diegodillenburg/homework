@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.unesp.rc.homework.repository;
-import com.unesp.rc.homework.model.Assignment;
+import com.unesp.rc.homework.model.Email;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +13,5 @@ import org.springframework.stereotype.Repository;
  * @author Felipe
  */
 @Repository
-public interface EmailRepository extends JpaRepository<Assignment, Long> {
+public interface EmailRepository extends JpaRepository<Email, Long> {
 }
