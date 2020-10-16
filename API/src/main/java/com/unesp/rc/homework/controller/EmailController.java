@@ -23,6 +23,8 @@ import java.util.Optional;
  *
  * @author Felipe
  */
+
+@RestController
 public class EmailController {
     @Autowired
     EmailRepository emailRepository;
