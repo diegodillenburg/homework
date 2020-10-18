@@ -6,13 +6,16 @@
 package com.unesp.rc.homework.model;
 
 import java.util.List;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  *
  * @author Felipe
  */
+
+@Entity
+@Inheritance
+@Table(name = "usuario")
 public class Usuario {
     @Id
     @GeneratedValue
@@ -24,14 +27,17 @@ public class Usuario {
 
     private String senha;
     
-    private List<Telefone> telefone;
+    private String telefone;
     
-    private List<Email> email;
+    private String email;
     
-    private List<Endereco> endereco;    
+    private String endereco;    
     
+    public Usuario(){
+        super();
+    }
     
-    public Usuario(Long id, String nome, String senha, String login, List email, List telefone, List endereco) {
+    public Usuario(Long id, String nome, String senha, String login, String email, String telefone, String endereco) {
         super();
         this.id = id;
         this.nome = nome;
@@ -74,27 +80,27 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public List<Telefone> getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(List<Telefone> telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    public List<Email> getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(List<Email> email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public List<Endereco> getEndereco() {
+    public String getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(List<Endereco> endereco) {
+    public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
 

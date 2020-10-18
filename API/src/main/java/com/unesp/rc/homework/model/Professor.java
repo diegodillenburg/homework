@@ -5,18 +5,24 @@
  */
 package com.unesp.rc.homework.model;
 
-import java.util.List;
+import javax.persistence.*;
+
 
 /**
  *
  * @author Felipe
  */
+@Entity
 public class Professor extends Usuario{
     private String departamento;
     
     private Boolean efetivo;
 
-    public Professor(String departamento, Boolean efetivo, Long id, String nome, String senha, String login, List email, List telefone, List endereco) {
+    public Professor(){
+    
+    }
+    
+    public Professor(String departamento, Boolean efetivo, Long id, String nome, String senha, String login, String email, String telefone, String endereco) {
         super(id, nome, senha, login, email, telefone, endereco);
         this.departamento = departamento;
         this.efetivo = efetivo;

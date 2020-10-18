@@ -6,19 +6,32 @@
 package com.unesp.rc.homework.model;
 
 import java.util.List;
+import javax.persistence.*;
 
 /**
  *
  * @author Felipe
  */
-public class Aluno  extends Usuario{
+@Entity
+public class Aluno extends Usuario{
+    
     private String periodo;
     
     private String instituicao;
     
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="usuario_turma",
+              joinColumns={@JoinColumn(name="usuario_id",
+               referencedColumnName="id")},
+              inverseJoinColumns={@JoinColumn(name="turma_id",
+                referencedColumnName="id")})
     private List<Turma> turmas;
-
-    public Aluno(String periodo, String instituicao, List<Turma> turmas, Long id, String nome, String senha, String login, List email, List telefone, List endereco) {
+    
+    public Aluno(){
+    
+    }
+    
+    public Aluno(Long id, String periodo, String instituicao, List<Turma> turmas, String nome, String senha, String login, String email, String telefone, String endereco) {
         super(id, nome, senha, login, email, telefone, endereco);
         this.periodo = periodo;
         this.instituicao = instituicao;

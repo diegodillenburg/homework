@@ -4,14 +4,13 @@
  * and open the template in the editor.
  */
 package com.unesp.rc.homework.repository;
-import com.unesp.rc.homework.model.Assignment;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.unesp.rc.homework.model.Aluno;
+import javax.transaction.Transactional;
 
 /**
  *
  * @author Felipe
  */
-@Repository
-public interface AlunoRepository extends JpaRepository<Assignment, Long> {
+@Transactional
+public interface AlunoRepository extends UsuarioBaseRepository<Aluno> {
 }
