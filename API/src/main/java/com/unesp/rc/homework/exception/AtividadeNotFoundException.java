@@ -1,9 +1,9 @@
 package com.unesp.rc.homework.exception;
 
-public class AssignmentNotFoundException extends Exception {
-    private long assignmentId;
+public class AtividadeNotFoundException extends Exception {
+    private long atividadeId;
 
-    public AssignmentNotFoundException(long assignmentId) {
-        super(String.format("No assignment found for id: %d", assignmentId));
+    public AtividadeNotFoundException(long atividadeId) {
+        super(String.format("No assignment found for id: %d", atividadeId));
     }
 }

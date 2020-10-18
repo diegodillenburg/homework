@@ -20,8 +20,8 @@ public class Aluno extends Usuario{
     private String instituicao;
     
     @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="usuario_turma",
-              joinColumns={@JoinColumn(name="usuario_id",
+    @JoinTable(name="matriculas",
+              joinColumns={@JoinColumn(name="aluno_id",
                referencedColumnName="id")},
               inverseJoinColumns={@JoinColumn(name="turma_id",
                 referencedColumnName="id")})

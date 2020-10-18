@@ -37,9 +37,9 @@ public class AtividadeController {
         Atividade atividade = atividadeRepository.findById(atividadeId)
                 .orElseThrow(() -> new AtividadeNotFoundException(atividadeId));
 
-        atividade.setTitle(atividadeDetails.getTitle());
-        atividade.setDescription(atividadeDetails.getDescription());
-        atividade.setAtividadeType(atividadeDetails.getAtividadeType());
+        atividade.setTitulo(atividadeDetails.getTitulo());
+        atividade.setDescricao(atividadeDetails.getDescricao());
+        atividade.setTipoAtividade(atividadeDetails.getTipoAtividade());
 
         Atividade updatedAtividade = atividadeRepository.save(atividade);
 

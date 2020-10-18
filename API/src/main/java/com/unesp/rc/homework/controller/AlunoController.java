@@ -1,6 +1,7 @@
 package com.unesp.rc.homework.controller;
 
 import com.unesp.rc.homework.model.Aluno;
+import com.unesp.rc.homework.model.Turma;
 import com.unesp.rc.homework.repository.AlunoRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +27,8 @@ public class AlunoController {
     }
     
     @GetMapping("/aluno/{id}")
-    public Optional<Aluno> getAlunoById(@PathVariable(value = "id") Long alunoId) {
+    public Optional<Aluno> getAlunoById(@PathVariable(value = "id") Long alunoId) {        
         return alunoRepository.findById(alunoId);
     }
+    
 }
