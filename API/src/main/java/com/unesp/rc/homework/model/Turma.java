@@ -22,6 +22,9 @@ public class Turma {
     
     private String nome;
     
+    @ManyToOne
+    private Professor professor; 
+    
     private Date data_inicio_inscricao;
 
     private Date data_fim_inscricao;
@@ -38,16 +41,25 @@ public class Turma {
         super();
     }
     
-    public Turma(Long id, String nome, Date data_inicio_inscricao, Date data_fim_inscricao, Date data_inicio_aulas, Date data_fim_aulas, double carga_total, int max_alunos){
+    public Turma(Long id, String nome, Professor professor, Date data_inicio_inscricao, Date data_fim_inscricao, Date data_inicio_aulas, Date data_fim_aulas, double carga_total, int max_alunos){
         super();
         this.id = id;
         this.nome = nome;
+        this.professor = professor;
         this.data_inicio_inscricao = data_inicio_inscricao;
         this.data_fim_inscricao = data_fim_inscricao;
         this.data_inicio_aulas = data_inicio_aulas;
         this.data_fim_aulas = data_fim_aulas;
         this.carga_total = carga_total;
         this.max_alunos = max_alunos;
+    }
+    
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
     
     public Date getData_inicio_inscricao() {
