@@ -26,9 +26,7 @@ public class MatriculaController {
     
     @GetMapping("/matriculas/{aluno_id}")
     public List<Matricula> getAllByAlunoId(@PathVariable(name = "aluno_id") Long aluno_id) {
-        List<Matricula> matriculas = matriculaRepository.findByAlunoId(aluno_id);
-        
-        return matriculas;
+        return matriculaRepository.findByAlunoId(aluno_id);
     }
     
     @PostMapping("/matricula")
