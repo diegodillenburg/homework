@@ -24,6 +24,7 @@ import com.example.homework.views.addressform.AddressFormView;
 import com.example.homework.views.helloworld.HelloWorldView;
 import com.example.homework.views.about.AboutView;
 import com.example.homework.views.email.EmailView;
+import com.example.homework.views.login.LoginFormView;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -53,7 +54,7 @@ public class MainView extends AppLayout {
         layout.add(new DrawerToggle());
         viewTitle = new H1();
         layout.add(viewTitle);
-        layout.add(new Image("images/user.svg", "Avatar"));
+        layout.add(new LoginFormView());
         return layout;
     }
 
