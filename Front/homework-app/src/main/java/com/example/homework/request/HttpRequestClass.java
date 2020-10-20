@@ -5,12 +5,15 @@
  */
 package com.example.homework.request;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import org.apache.http.client.methods.HttpGet;
@@ -57,15 +60,21 @@ public class HttpRequestClass {
     }
     
     private HttpResponse postMethod(String path, String body){
-        HttpResponse response = null;
         try{
-            CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-            HttpPost post = new HttpPost(apiHost + path);
-            StringEntity postingString = new StringEntity(body);
-            post.setEntity(postingString);
-            post.setHeader("Content-type", "application/json");
-            response = (HttpResponse) httpClient.execute(post);
+            
+            ObjectMapper objectMapper = new ObjectMapper();
+            String requestBody = objectMapper
+                    .writeValueAsString(body);
 
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(apiHost + path))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(body))
+                    .build();
+
+            HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            
             return response;
         }
         catch(Exception e){

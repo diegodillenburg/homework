@@ -6,26 +6,18 @@
 package com.example.homework.views.login;
 
 import com.example.homework.data.entity.Usuario;
-import com.example.homework.data.service.LoginRepository;
 import com.example.homework.data.service.LoginService;
 import com.example.homework.views.main.MainView;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.UI;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.login.AbstractLogin.LoginEvent;
-import com.vaadin.flow.component.login.LoginI18n;
 import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
-import org.json.simple.JSONObject;
 
 /**
  *
@@ -35,6 +27,8 @@ import org.json.simple.JSONObject;
 @PageTitle("Login Form")
 public class LoginFormView extends HorizontalLayout {
 
+    private Usuario loggedUser = new Usuario();
+    
     private Button loginButton = new Button("Login");
 
     private Button logoutButton = new Button("Logout");
@@ -79,10 +73,16 @@ public class LoginFormView extends HorizontalLayout {
         String user = e.getUsername();
         String password = e.getPassword();
         
-        HttpResponse teste = loginService.autenticar(user, password);
+        HttpResponse response = loginService.autenticar(user, password);
         
-        if(user.equals("pedro") && password.equals("teste"))
-            return true;
+        if(response != null){
+            try{
+                loggedUser = new ObjectMapper().readValue(response.body().toString(), Usuario.class);
+                return true;
+            }catch(JsonProcessingException ex){
+                return false;
+            }
+        }
         
         return false;
     }
