@@ -1,13 +1,12 @@
 package com.unesp.rc.homework.model;
 
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "atividades")
 public class Atividade {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     private String titulo;

@@ -21,12 +21,12 @@ public class AlunoController {
         return alunoRepository.findAll();
     }
     
-    @PostMapping("/aluno")
+    @PostMapping("/alunos")
     public Aluno createAluno(@RequestBody Aluno aluno) {
         return alunoRepository.save(aluno);
     }
     
-    @GetMapping("/aluno/{id}")
+    @GetMapping("/alunos/{id}")
     public Optional<Aluno> getAlunoById(@PathVariable(value = "id") Long alunoId) {        
         return alunoRepository.findById(alunoId);
     }

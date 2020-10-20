@@ -16,17 +16,17 @@ public class ProfessorController {
     ProfessorRepository professorRepository;
     
     @GetMapping("/professores")
-    public List<Professor> getAllAlunos() {
+    public List<Professor> getAllProfessores() {
         return professorRepository.findAll();
     }
     
-    @PostMapping("/professor")
-    public Professor createAluno(@RequestBody Professor professor) {
+    @PostMapping("/professores")
+    public Professor createProfessor(@RequestBody Professor professor) {
         return professorRepository.save(professor);
     }
     
-    @GetMapping("/professor/{id}")
-    public Optional<Professor> getAlunoById(@PathVariable(value = "id") Long professorId) {
+    @GetMapping("/professores/{id}")
+    public Optional<Professor> getProfessorById(@PathVariable(value = "id") Long professorId) {
         return professorRepository.findById(professorId);
     }
 }

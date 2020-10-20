@@ -20,12 +20,7 @@ public class UsuarioController {
         return usuarioRepository.findAll();
     }
     
-    @PostMapping("/usuario")
-    public Usuario create(@RequestBody Usuario usuario) {
-        return usuarioRepository.save(usuario);
-    }
-    
-    @GetMapping("/usuario/{id}")
+    @GetMapping("/usuarios/{id}")
     public Optional<Usuario> getById(@PathVariable(value = "id") Long usuarioId) {
         return usuarioRepository.findById(usuarioId);
     }

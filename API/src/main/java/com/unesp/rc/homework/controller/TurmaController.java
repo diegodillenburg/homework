@@ -16,16 +16,23 @@ public class TurmaController {
     TurmaRepository turmaRepository;
     
     @GetMapping("/turmas")
-    public List<Turma> getAll() {
-        return turmaRepository.findAll();
+    public List<Turma> getAll(@RequestParam(required = false, value = "professor_id") Long professorId,
+                              @RequestParam(required = false, value = "aluno_id") Long alunoId) {
+        if (professorId != null) {
+            return turmaRepository.findTurmasByProfessorId(professorId);
+        } else if (alunoId != null) {
+            return turmaRepository.findTurmasByAlunoId(alunoId);
+        } else {
+            return turmaRepository.findAll();
+        }
     }
     
-    @PostMapping("/turma")
+    @PostMapping("/turmas")
     public Turma create(@RequestBody Turma turma) {
         return turmaRepository.save(turma);
     }
     
-    @GetMapping("/turma/{id}")
+    @GetMapping("/turmas/{id}")
     public Optional<Turma> getById(@PathVariable(value = "id") Long turmaId) {
         return turmaRepository.findById(turmaId);
     }

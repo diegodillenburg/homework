@@ -1,24 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.unesp.rc.homework.model;
 
 import java.util.List;
 import javax.persistence.*;
 
-/**
- *
- * @author Felipe
- */
-
 @Entity
 @Inheritance
-@Table(name = "usuario")
+@Table(name = "usuarios")
 public class Usuario {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
@@ -48,11 +38,11 @@ public class Usuario {
         this.endereco = endereco;
     }
 
-    public Long getId() {
+    public Long getid() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setid(Long id) {
         this.id = id;
     }
 
