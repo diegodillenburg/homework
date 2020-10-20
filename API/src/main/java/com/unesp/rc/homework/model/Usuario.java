@@ -1,10 +1,21 @@
 package com.unesp.rc.homework.model;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import javax.persistence.*;
 
 @Entity
 @Inheritance
+@JsonTypeName("Usuario")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,
+              include = JsonTypeInfo.As.PROPERTY,
+              property = "type")
+@JsonSubTypes({
+  @Type(value=Aluno.class, name = "Aluno"),
+  @Type(value=Professor.class, name = "Professor")
+})
 @Table(name = "usuarios")
 public class Usuario {
     @Id

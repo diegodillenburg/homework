@@ -23,5 +23,11 @@ public class UsuarioController {
     @GetMapping("/usuarios/{id}")
     public Optional<Usuario> getById(@PathVariable(value = "id") Long usuarioId) {
         return usuarioRepository.findById(usuarioId);
+    }   
+    
+    @PostMapping("/usuarios/login")
+    public Optional<Usuario> authenticate(@RequestBody Usuario usuario) {
+        
+        return usuarioRepository.authenticate(usuario.getLogin(),usuario.getSenha());
     }
 }

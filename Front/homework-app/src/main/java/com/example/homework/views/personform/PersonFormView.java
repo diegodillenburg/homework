@@ -1,7 +1,6 @@
 package com.example.homework.views.personform;
 
 import com.example.homework.data.entity.Person;
-import com.example.homework.data.entity.Email;
 import com.example.homework.data.service.PersonService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
@@ -23,7 +22,6 @@ import com.vaadin.flow.router.Route;
 import com.example.homework.views.main.MainView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.router.RouteAlias;
 import java.util.ArrayList;
 import org.json.simple.JSONObject;
@@ -44,9 +42,7 @@ public class PersonFormView extends Div {
 
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
-    
-    private Grid<Email> grid = new Grid<>(Email.class);
-
+   
     private Binder<Person> binder = new Binder(Person.class);
 
     public PersonFormView(PersonService personService) {
@@ -67,25 +63,6 @@ public class PersonFormView extends Div {
             clearForm();
         });
     }
-    
-    private ArrayList<Email> proccessEmails(ArrayList<JSONObject> items) {
-        
-        ObjectMapper mapper = new ObjectMapper();
-        ArrayList<Email> emails = new ArrayList<Email>();
-        
-        try
-        {
-            for(JSONObject item : items){
-                Email data = mapper.readValue(item.toString(), Email.class);
-                emails.add(data);
-            }
-        }
-        catch(Exception e)
-        {
-            return null;
-        }
-        return emails;
-    }
 
     private void clearForm() {
         binder.setBean(new Person());
@@ -104,7 +81,6 @@ public class PersonFormView extends Div {
     
     private Component creatListLayout() {
         FormLayout formLayout = new FormLayout();
-        formLayout.add(grid);
         return formLayout;
     }
 

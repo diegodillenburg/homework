@@ -1,14 +1,16 @@
-package com.unesp.rc.homework.model;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.example.homework.data.entity;
 
-import javax.persistence.*;
+import com.example.homework.data.AbstractEntity;
 import java.util.List;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "atividades")
-public class Atividade {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+public class Atividade extends AbstractEntity{
 
     private Long turma_id;
 
@@ -21,28 +23,6 @@ public class Atividade {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="atividade_id")
     private List<Comentario> comentarios;
-
-    public Atividade() {
-        super();
-    }
-    
-    public Atividade(Long id, Long turma_id, String titulo, String descricao, String tipoAtividade, List<Comentario> comentarios) {
-        super();
-        this.id = id;
-        this.turma_id = turma_id;
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.tipoAtividade = tipoAtividade;
-        this.comentarios = comentarios;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getTurmaId() { return turma_id; }
 

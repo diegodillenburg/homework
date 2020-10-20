@@ -6,13 +6,24 @@
 package com.example.homework.data.entity;
 
 import com.example.homework.data.AbstractEntity;
-import javax.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import javax.persistence.*;
 
 @Entity
+@Inheritance
+@JsonTypeName("Usuario")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,
+              include = JsonTypeInfo.As.PROPERTY,
+              property = "type")
+@JsonSubTypes({
+  @Type(value=Aluno.class, name = "Aluno"),
+  @Type(value=Professor.class, name = "Professor")
+})
 public class Usuario extends AbstractEntity{
     
-    private Long id;
-
     private String nome;
 
     private String login;
@@ -24,10 +35,6 @@ public class Usuario extends AbstractEntity{
     private String email;
     
     private String endereco;    
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;

@@ -5,12 +5,8 @@
  */
 package com.example.homework.data.entity;
 
-import javax.persistence.Entity;
-
-/**
- *
- * @author Spiga
- */
+import java.util.List;
+import javax.persistence.*;
 
 @Entity
 public class Aluno extends Usuario{
@@ -19,6 +15,12 @@ public class Aluno extends Usuario{
     
     private String instituicao;
     
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="matriculas",
+              joinColumns={@JoinColumn(name="aluno_id",
+               referencedColumnName="id")},
+              inverseJoinColumns={@JoinColumn(name="turma_id",
+                referencedColumnName="id")})
     private List<Turma> turmas;
 
     public String getPeriodo() {

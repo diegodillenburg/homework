@@ -6,8 +6,9 @@
 package com.example.homework.views.login;
 
 import com.example.homework.data.entity.Usuario;
-import com.example.homework.data.service.LoginService;
+import com.example.homework.data.service.UsuarioService;
 import com.example.homework.views.main.MainView;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.component.button.Button;
@@ -35,9 +36,11 @@ public class LoginFormView extends HorizontalLayout {
     
     private LoginOverlay component = new LoginOverlay();
     
-    private LoginService loginService = new LoginService();
+    private UsuarioService usuarioService = new UsuarioService();
     
     private Binder<Usuario> binder = new Binder<>(Usuario.class);
+    
+    private ObjectMapper mapper = new ObjectMapper();
     
     public LoginFormView() {
 
@@ -73,11 +76,11 @@ public class LoginFormView extends HorizontalLayout {
         String user = e.getUsername();
         String password = e.getPassword();
         
-        HttpResponse response = loginService.autenticar(user, password);
+        HttpResponse response = usuarioService.autenticar(user, password);
         
         if(response != null){
             try{
-                loggedUser = new ObjectMapper().readValue(response.body().toString(), Usuario.class);
+                loggedUser = mapper.readValue(response.body().toString(), Usuario.class);
                 return true;
             }catch(JsonProcessingException ex){
                 return false;

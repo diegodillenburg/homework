@@ -1,16 +1,17 @@
-package com.unesp.rc.homework.model;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.example.homework.data.entity;
 
+import com.example.homework.data.AbstractEntity;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "turmas")
-public class Turma {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+public class Turma extends AbstractEntity{
     
     private String nome;
     
@@ -32,24 +33,6 @@ public class Turma {
     private double carga_total;
     
     private int max_alunos;
-    
-    public Turma(){
-        super();
-    }
-    
-    public Turma(Long id, String nome, Professor professor, List<Atividade> atividades, Date data_inicio_inscricao, Date data_fim_inscricao, Date data_inicio_aulas, Date data_fim_aulas, double carga_total, int max_alunos){
-        super();
-        this.id = id;
-        this.nome = nome;
-        this.professor = professor;
-        this.atividades = atividades;
-        this.data_inicio_inscricao = data_inicio_inscricao;
-        this.data_fim_inscricao = data_fim_inscricao;
-        this.data_inicio_aulas = data_inicio_aulas;
-        this.data_fim_aulas = data_fim_aulas;
-        this.carga_total = carga_total;
-        this.max_alunos = max_alunos;
-    }
     
     public Professor getProfessor() {
         return professor;
@@ -121,13 +104,5 @@ public class Turma {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-   
-    public Long getid() {
-        return id;
-    }
-
-    public void setid(Long id) {
-        this.id = id;
     }
 }

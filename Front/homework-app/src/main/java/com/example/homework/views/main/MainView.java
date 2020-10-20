@@ -23,7 +23,6 @@ import com.example.homework.views.personform.PersonFormView;
 import com.example.homework.views.addressform.AddressFormView;
 import com.example.homework.views.helloworld.HelloWorldView;
 import com.example.homework.views.about.AboutView;
-import com.example.homework.views.email.EmailView;
 import com.example.homework.views.login.LoginFormView;
 import com.vaadin.flow.component.button.Button;
 
@@ -88,7 +87,6 @@ public class MainView extends AppLayout {
         return new Tab[] {
             createTab("Person Form", PersonFormView.class),
             createTab("Address Form", AddressFormView.class),
-            createTab("Email Form", EmailView.class),
             createTab("Hello World", HelloWorldView.class),
             createTab("About", AboutView.class)
         };
