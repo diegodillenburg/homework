@@ -26,6 +26,11 @@ public class TurmaController {
             return turmaRepository.findAll();
         }
     }
+
+    @GetMapping("/turmas/disponiveis")
+    public List<Turma> getTurmasDisponiveis() {
+        return turmaRepository.findTurmasDisponiveis();
+    }
     
     @PostMapping("/turmas")
     public Turma create(@RequestBody Turma turma) {
