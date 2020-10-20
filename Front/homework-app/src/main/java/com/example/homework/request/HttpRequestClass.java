@@ -61,7 +61,6 @@ public class HttpRequestClass {
         try{
             CloseableHttpClient httpClient = HttpClientBuilder.create().build();
             HttpPost post = new HttpPost(apiHost + path);
-            Gson gson = new Gson();
             StringEntity postingString = new StringEntity(body);
             post.setEntity(postingString);
             post.setHeader("Content-type", "application/json");
