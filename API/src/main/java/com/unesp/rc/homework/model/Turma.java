@@ -1,30 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.unesp.rc.homework.model;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
-/**
- *
- * @author Felipe
- */
 @Entity
-@Table(name = "turma")
+@Table(name = "turmas")
 public class Turma {
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
     private String nome;
     
     @ManyToOne
-    private Professor professor; 
-    
+    private Professor professor;
+
+    @OneToMany(mappedBy = "turma_id")
+    private List<Atividade> atividades;
+
     private Date data_inicio_inscricao;
 
     private Date data_fim_inscricao;
@@ -41,11 +36,12 @@ public class Turma {
         super();
     }
     
-    public Turma(Long id, String nome, Professor professor, Date data_inicio_inscricao, Date data_fim_inscricao, Date data_inicio_aulas, Date data_fim_aulas, double carga_total, int max_alunos){
+    public Turma(Long id, String nome, Professor professor, List<Atividade> atividades, Date data_inicio_inscricao, Date data_fim_inscricao, Date data_inicio_aulas, Date data_fim_aulas, double carga_total, int max_alunos){
         super();
         this.id = id;
         this.nome = nome;
         this.professor = professor;
+        this.atividades = atividades;
         this.data_inicio_inscricao = data_inicio_inscricao;
         this.data_fim_inscricao = data_fim_inscricao;
         this.data_inicio_aulas = data_inicio_aulas;
@@ -60,6 +56,14 @@ public class Turma {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public List<Atividade> getAtividades() {
+        return atividades;
+    }
+
+    public void setAtividades(List<Atividade> atividades) {
+        this.atividades = atividades;
     }
     
     public Date getData_inicio_inscricao() {
@@ -118,11 +122,11 @@ public class Turma {
         this.nome = nome;
     }
    
-    public Long getId() {
+    public Long getid() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setid(Long id) {
         this.id = id;
     }
 }

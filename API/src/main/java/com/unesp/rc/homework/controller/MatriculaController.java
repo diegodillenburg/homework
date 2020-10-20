@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.unesp.rc.homework.controller;
 
 import com.unesp.rc.homework.model.Matricula;
@@ -15,10 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-/**
- *
- * @author Spiga
- */
+
 @RestController
 public class MatriculaController {
     @Autowired
@@ -29,7 +21,7 @@ public class MatriculaController {
         return matriculaRepository.findByAlunoId(aluno_id);
     }
     
-    @PostMapping("/matricula")
+    @PostMapping("/matriculas")
     public Matricula create(@RequestBody Matricula matricula) {
         return matriculaRepository.save(matricula);
     }
