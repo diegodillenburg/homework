@@ -20,6 +20,7 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -78,7 +79,7 @@ public class LoginFormView extends HorizontalLayout {
         String user = e.getUsername();
         String password = e.getPassword();
         
-        JSONObject teste = loginService.autenticar(user, password);
+        HttpResponse teste = loginService.autenticar(user, password);
         
         if(user.equals("pedro") && password.equals("teste"))
             return true;

@@ -30,12 +30,12 @@ public class HttpRequestClass {
     
     private String apiHost = "http://localhost:8080/";
     
-    public String request(String method, String path, String body){
+    public HttpResponse request(String method, String path, String body){
         switch (method){
             case "GET":
-                return getMethod(path).body().toString();
+                return getMethod(path);
             case "POST":
-                return postMethod(path, body).body().toString();
+                return postMethod(path, body);
             default:
                 return null;
         }

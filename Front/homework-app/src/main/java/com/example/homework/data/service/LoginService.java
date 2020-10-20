@@ -6,6 +6,7 @@ import com.example.homework.request.HttpRequestClass;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import java.net.http.HttpResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class LoginService extends CrudService<Usuario, Integer> {
         return null;
     }
     
-    public JSONObject autenticar(String login, String senha){
+    public HttpResponse autenticar(String login, String senha){
         
         HttpRequestClass resquestClass = new HttpRequestClass();
         Usuario user = new Usuario();
@@ -50,10 +51,12 @@ public class LoginService extends CrudService<Usuario, Integer> {
          } catch (JsonProcessingException e) {
              e.printStackTrace();
          }
-        String retorno = resquestClass.request("POST", "usuario/login", json);
+        HttpResponse retorno = resquestClass.request("POST", "usuario/login", json);//aqui ta o erro
         
-        Gson gson = new Gson();
-        return null;
+        //Gson gson = new Gson();
+        
+       
+        return retorno;
     }
 
 }
