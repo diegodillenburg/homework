@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 public class Professor extends Usuario{
+
     private String departamento;
     
     private Boolean efetivo;

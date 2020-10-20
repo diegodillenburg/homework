@@ -16,8 +16,8 @@ public class AtividadeController {
     AtividadeRepository atividadeRepository;
 
     @GetMapping("/atividades")
-    public List<Atividade> getAllAtividade() {
-        return atividadeRepository.findAll();
+    public List<Atividade> getAllAtividade(@RequestParam(name = "turma_id") Long turma_id) {
+        return atividadeRepository.findByTurmaId(turma_id);
     }
 
     @PostMapping("/atividades")
