@@ -1,7 +1,7 @@
 package com.example.homework.views.personform;
 
 import com.example.homework.data.entity.Person;
-import com.example.homework.data.model.Email;
+import com.example.homework.data.entity.Email;
 import com.example.homework.data.service.PersonService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
@@ -63,7 +63,6 @@ public class PersonFormView extends Div {
         cancel.addClickListener(e -> clearForm());
         save.addClickListener(e -> {
             personService.update(binder.getBean());
-            grid.setItems(proccessEmails(personService.getRequest()));
             Notification.show("Person details stored.");
             clearForm();
         });

@@ -5,11 +5,20 @@
  */
 package com.example.homework.request;
 
+import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -21,34 +30,44 @@ public class HttpRequestClass {
     
     private String apiHost = "http://localhost:8080/";
     
-    public ArrayList<JSONObject> request(String method, String path, String body){
+    public String request(String method, String path, String body){
         switch (method){
             case "GET":
-                return getMethod(path, body);
+                return getMethod(path).body().toString();
+            case "POST":
+                return postMethod(path, body).body().toString();
             default:
                 return null;
         }
     }
     
-    private ArrayList<JSONObject> getMethod(String path, String body){
+    private HttpResponse getMethod(String path){
+        HttpResponse response = null;
         try{
-            URL url = new URL(apiHost + path);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("GET");
-            
-            BufferedReader in = new BufferedReader(
-              new InputStreamReader(con.getInputStream()));
-            
-            String inputLine = null;
+            CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+            HttpGet get = new HttpGet(apiHost + path);
+            Gson gson = new Gson();
+            response = (HttpResponse) httpClient.execute(get);
 
-            ArrayList<JSONObject> json = new ArrayList<JSONObject>();
-            while((inputLine = in.readLine()) != null) {
-                json = (ArrayList<JSONObject>) new JSONParser().parse(inputLine);
-            }
-            
-            in.close();
+            return response;
+        }
+        catch(Exception e){
+            return null;
+        }
+    }
+    
+    private HttpResponse postMethod(String path, String body){
+        HttpResponse response = null;
+        try{
+            CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+            HttpPost post = new HttpPost(apiHost + path);
+            Gson gson = new Gson();
+            StringEntity postingString = new StringEntity(body);
+            post.setEntity(postingString);
+            post.setHeader("Content-type", "application/json");
+            response = (HttpResponse) httpClient.execute(post);
 
-            return json;
+            return response;
         }
         catch(Exception e){
             return null;

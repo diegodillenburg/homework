@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.homework.data.model;
+package com.example.homework.data.entity;
 
 import com.example.homework.data.AbstractEntity;
 import javax.persistence.Entity;

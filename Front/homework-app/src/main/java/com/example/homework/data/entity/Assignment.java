@@ -1,4 +1,4 @@
-package com.example.homework.data.model;
+package com.example.homework.data.entity;
 
 public class Assignment {
     

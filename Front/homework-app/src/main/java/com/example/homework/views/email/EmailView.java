@@ -1,6 +1,6 @@
 package com.example.homework.views.email;
 
-import com.example.homework.data.model.Email;
+import com.example.homework.data.entity.Email;
 import com.example.homework.data.service.EmailService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;

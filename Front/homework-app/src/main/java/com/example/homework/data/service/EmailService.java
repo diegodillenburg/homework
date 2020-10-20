@@ -1,6 +1,6 @@
 package com.example.homework.data.service;
 
-import com.example.homework.data.model.Email;
+import com.example.homework.data.entity.Email;
 import com.example.homework.request.HttpRequestClass;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class EmailService extends CrudService<Email, Integer> {
     
     public ArrayList<JSONObject> getRequest(){
         HttpRequestClass resquestClass = new HttpRequestClass();
-        return resquestClass.request("GET", "emails", "");
+        return null;
     }
 
 }

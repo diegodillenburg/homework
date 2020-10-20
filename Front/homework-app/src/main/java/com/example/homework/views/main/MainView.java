@@ -25,6 +25,7 @@ import com.example.homework.views.helloworld.HelloWorldView;
 import com.example.homework.views.about.AboutView;
 import com.example.homework.views.email.EmailView;
 import com.example.homework.views.login.LoginFormView;
+import com.vaadin.flow.component.button.Button;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -92,7 +93,7 @@ public class MainView extends AppLayout {
             createTab("About", AboutView.class)
         };
     }
-
+    
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
         final Tab tab = new Tab();
         tab.add(new RouterLink(text, navigationTarget));
