@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "turmas")
 public class Turma {
-    
+       
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +17,8 @@ public class Turma {
     @ManyToOne
     private Professor professor;
 
-    @OneToMany(mappedBy = "turma_id")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="turma_id")
     private List<Atividade> atividades;
 
     private Date data_inicio_inscricao;

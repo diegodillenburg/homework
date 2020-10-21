@@ -5,6 +5,7 @@
  */
 package com.example.homework.data.entity;
 
+import java.util.List;
 import javax.persistence.Entity;
 
 /**
@@ -19,7 +20,7 @@ public class Aluno extends Usuario{
     
     private String instituicao;
     
-    private List<Turma> turmas;
+//    private List<Turma> turmas;
 
     public String getPeriodo() {
         return periodo;
@@ -37,13 +38,13 @@ public class Aluno extends Usuario{
         this.instituicao = instituicao;
     }
 
-    public List<Turma> getTurmas() {
-        return turmas;
-    }
-
-    public void setTurmas(List<Turma> turmas) {
-        this.turmas = turmas;
-    }
+//    public List<Turma> getTurmas() {
+//        return turmas;
+//    }
+//
+//    public void setTurmas(List<Turma> turmas) {
+//        this.turmas = turmas;
+//    }
     
     
     

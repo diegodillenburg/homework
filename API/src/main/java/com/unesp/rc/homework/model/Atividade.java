@@ -18,7 +18,8 @@ public class Atividade {
 
     private String tipoAtividade;
 
-//    @OneToMany(mappedBy = "atividade_id")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="atividade_id")
     private List<Comentario> comentarios;
 
     public Atividade() {
