@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "turmas")
 public class Turma {
-    
+       
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
