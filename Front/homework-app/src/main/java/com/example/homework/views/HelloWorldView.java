@@ -1,4 +1,4 @@
-package com.example.homework.views.helloworld;
+package com.example.homework.views;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -8,7 +8,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.example.homework.views.main.MainView;
+import com.example.homework.views.MainView;
 
 @Route(value = "hello", layout = MainView.class)
 @PageTitle("Hello World")

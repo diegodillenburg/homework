@@ -5,10 +5,13 @@
  */
 package com.example.homework.data.service;
 
-import com.example.homework.data.entity.Email;
-
+import com.example.homework.data.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EmailRepository extends JpaRepository<Email, Integer> {
-
+/**
+ *
+ * @author Spiga
+ */
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+    
 }

@@ -5,27 +5,23 @@ import com.example.homework.data.entity.Usuario;
 import com.example.homework.request.HttpRequestClass;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import java.net.http.HttpResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.vaadin.artur.helpers.CrudService;
 import java.util.ArrayList;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 @Service
-public class LoginService extends CrudService<Usuario, Integer> {
+public class UsuarioService extends CrudService<Usuario, Integer> {
 
-    private LoginRepository repository;
+    private UsuarioRepository repository;
 
-    public LoginService() {
+    public UsuarioService() {
         this.repository = repository;
     }
 
     @Override
-    protected LoginRepository getRepository() {
+    protected UsuarioRepository getRepository() {
         return repository;
     }   
     
@@ -51,11 +47,8 @@ public class LoginService extends CrudService<Usuario, Integer> {
          } catch (JsonProcessingException e) {
              e.printStackTrace();
          }
-        HttpResponse retorno = resquestClass.request("POST", "usuario/login", json);//aqui ta o erro
-        
-        //Gson gson = new Gson();
-        
-       
+        HttpResponse retorno = resquestClass.request("POST", "usuarios/login", json);
+             
         return retorno;
     }
 

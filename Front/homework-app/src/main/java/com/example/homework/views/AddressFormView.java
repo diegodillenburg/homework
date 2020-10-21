@@ -1,4 +1,4 @@
-package com.example.homework.views.addressform;
+package com.example.homework.views;
 
 import com.example.homework.data.entity.Address;
 import com.example.homework.data.service.AddressService;
@@ -16,7 +16,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.example.homework.views.main.MainView;
+import com.example.homework.views.MainView;
 
 @Route(value = "address-form", layout = MainView.class)
 @PageTitle("Address Form")

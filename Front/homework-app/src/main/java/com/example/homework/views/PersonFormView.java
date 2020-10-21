@@ -1,7 +1,6 @@
-package com.example.homework.views.personform;
+package com.example.homework.views;
 
 import com.example.homework.data.entity.Person;
-import com.example.homework.data.entity.Email;
 import com.example.homework.data.service.PersonService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
@@ -20,18 +19,11 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.example.homework.views.main.MainView;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.listbox.ListBox;
-import com.vaadin.flow.router.RouteAlias;
-import java.util.ArrayList;
-import org.json.simple.JSONObject;
+import com.example.homework.views.MainView;
 
 @Route(value = "person-form", layout = MainView.class)
 @PageTitle("Person Form")
 @CssImport("./styles/views/personform/person-form-view.css")
-@RouteAlias(value = "", layout = MainView.class)
 public class PersonFormView extends Div {
 
     private String[] vec = {};
@@ -44,9 +36,7 @@ public class PersonFormView extends Div {
 
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
-    
-    private Grid<Email> grid = new Grid<>(Email.class);
-
+   
     private Binder<Person> binder = new Binder(Person.class);
 
     public PersonFormView(PersonService personService) {
@@ -67,25 +57,6 @@ public class PersonFormView extends Div {
             clearForm();
         });
     }
-    
-    private ArrayList<Email> proccessEmails(ArrayList<JSONObject> items) {
-        
-        ObjectMapper mapper = new ObjectMapper();
-        ArrayList<Email> emails = new ArrayList<Email>();
-        
-        try
-        {
-            for(JSONObject item : items){
-                Email data = mapper.readValue(item.toString(), Email.class);
-                emails.add(data);
-            }
-        }
-        catch(Exception e)
-        {
-            return null;
-        }
-        return emails;
-    }
 
     private void clearForm() {
         binder.setBean(new Person());
@@ -104,7 +75,6 @@ public class PersonFormView extends Div {
     
     private Component creatListLayout() {
         FormLayout formLayout = new FormLayout();
-        formLayout.add(grid);
         return formLayout;
     }
 
