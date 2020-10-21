@@ -1,5 +1,6 @@
-package com.example.homework.views.main;
+package com.example.homework.views;
 
+import com.example.homework.data.entity.Usuario;
 import java.util.Optional;
 
 import com.vaadin.flow.component.Component;
@@ -19,22 +20,20 @@ import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
-import com.example.homework.views.personform.PersonFormView;
-import com.example.homework.views.addressform.AddressFormView;
-import com.example.homework.views.helloworld.HelloWorldView;
-import com.example.homework.views.about.AboutView;
-import com.example.homework.views.login.LoginFormView;
-import com.vaadin.flow.component.button.Button;
 
 /**
  * The main view is a top-level placeholder for other views.
  */
 @JsModule("./styles/shared-styles.js")
 @CssImport("./styles/views/main/main-view.css")
-@PWA(name = "Homework App", shortName = "Homework App", enableInstallPrompt = false)
 public class MainView extends AppLayout {
 
-    private final Tabs menu;
+    public static Usuario loggedUser = new Usuario();
+    
+    public static Tabs menu;
+    
+    public static VerticalLayout menuBar;
+
     private H1 viewTitle;
 
     public MainView() {
@@ -51,27 +50,30 @@ public class MainView extends AppLayout {
         layout.setWidthFull();
         layout.setSpacing(false);
         layout.setAlignItems(FlexComponent.Alignment.CENTER);
+        layout.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
         layout.add(new DrawerToggle());
         viewTitle = new H1();
         layout.add(viewTitle);
-        layout.add(new LoginFormView());
+        LoginFormView login = new LoginFormView();
+        layout.add(login);
+        
         return layout;
     }
 
     private Component createDrawerContent(Tabs menu) {
-        VerticalLayout layout = new VerticalLayout();
-        layout.setSizeFull();
-        layout.setPadding(false);
-        layout.setSpacing(false);
-        layout.getThemeList().set("spacing-s", true);
-        layout.setAlignItems(FlexComponent.Alignment.STRETCH);
+        menuBar = new VerticalLayout();
+        menuBar.setSizeFull();
+        menuBar.setPadding(false);
+        menuBar.setSpacing(false);
+        menuBar.getThemeList().set("spacing-s", true);
+        menuBar.setAlignItems(FlexComponent.Alignment.STRETCH);
         HorizontalLayout logoLayout = new HorizontalLayout();
         logoLayout.setId("logo");
         logoLayout.setAlignItems(FlexComponent.Alignment.CENTER);
         logoLayout.add(new Image("images/logo.png", "Homework App logo"));
         logoLayout.add(new H1("Homework App"));
-        layout.add(logoLayout, menu);
-        return layout;
+        menuBar.add(logoLayout, menu);
+        return menuBar;
     }
 
     private Tabs createMenu() {
@@ -116,4 +118,5 @@ public class MainView extends AppLayout {
     private String getCurrentPageTitle() {
         return getContent().getClass().getAnnotation(PageTitle.class).value();
     }
+
 }

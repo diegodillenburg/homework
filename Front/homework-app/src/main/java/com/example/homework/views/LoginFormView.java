@@ -3,19 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.homework.views.login;
+package com.example.homework.views;
 
 import com.example.homework.data.entity.Aluno;
 import com.example.homework.data.entity.Professor;
 import com.example.homework.data.entity.Usuario;
 import com.example.homework.data.service.UsuarioService;
-import com.example.homework.views.main.MainView;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.example.homework.views.MainView;
+import static com.example.homework.views.MainView.menu;
+import static com.example.homework.views.MainView.menuBar;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
-import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.login.AbstractLogin.LoginEvent;
 import com.vaadin.flow.component.login.LoginOverlay;
@@ -33,13 +32,11 @@ import java.net.http.HttpResponse;
 @PageTitle("Login Form")
 public class LoginFormView extends HorizontalLayout {
 
-    private Usuario loggedUser = new Usuario();
-    
     private Button loginButton = new Button("Login");
 
     private Button logoutButton = new Button("Logout");
     
-    private LoginOverlay component = new LoginOverlay();
+    public LoginOverlay component = new LoginOverlay();
     
     private UsuarioService usuarioService = new UsuarioService();
     
@@ -58,6 +55,8 @@ public class LoginFormView extends HorizontalLayout {
         logoutButton.addClickListener( e -> {
                 loginButton.setVisible(true);
                 logoutButton.setVisible(false);
+                menu.setVisible(!menu.isVisible());
+                menuBar.setVisible(!menuBar.isVisible());
             }
         );
         
@@ -67,9 +66,13 @@ public class LoginFormView extends HorizontalLayout {
             if (isAuthenticated) {
                 loginButton.setVisible(false);
                 logoutButton.setVisible(true);
+                menu.setVisible(!menu.isVisible());
+                menuBar.setVisible(!menuBar.isVisible());
                 component.close();
             } else {
                 component.setError(true);
+                menu.setVisible(!menu.isVisible());
+                menuBar.setVisible(!menuBar.isVisible());
             }
         });
 
@@ -87,7 +90,7 @@ public class LoginFormView extends HorizontalLayout {
             try{
                 mapper.registerSubtypes(new NamedType(Aluno.class, "Aluno"));
                 mapper.registerSubtypes(new NamedType(Professor.class, "Professor"));
-                loggedUser = mapper.readValue(response.body().toString(), Usuario.class);
+                MainView.loggedUser = mapper.readValue(response.body().toString(), Usuario.class);
                 return true;
             }catch(JsonProcessingException ex){
                 return false;
