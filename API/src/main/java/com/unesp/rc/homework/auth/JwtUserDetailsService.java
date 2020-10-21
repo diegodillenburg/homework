@@ -1,4 +1,4 @@
-package com.unesp.rc.auth;
+package com.unesp.rc.homework.auth;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

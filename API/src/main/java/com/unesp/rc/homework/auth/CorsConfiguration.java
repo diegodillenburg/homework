@@ -1,4 +1,4 @@
-package com.unesp.rc.auth;
+package com.unesp.rc.homework.auth;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

@@ -1,7 +1,7 @@
-package com.unesp.rc.auth;
+package com.unesp.rc.homework.auth;
 
-import com.unesp.rc.auth.model.JwtRequest;
-import com.unesp.rc.auth.model.JwtResponse;
+import com.unesp.rc.homework.auth.model.JwtRequest;
+import com.unesp.rc.homework.auth.model.JwtResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

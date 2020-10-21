@@ -1,4 +1,4 @@
-package com.unesp.rc.auth;
+package com.unesp.rc.homework.auth;
 
 import java.io.IOException;
 import java.io.Serializable;

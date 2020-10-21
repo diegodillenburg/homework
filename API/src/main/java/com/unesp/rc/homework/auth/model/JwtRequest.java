@@ -1,4 +1,4 @@
-package com.unesp.rc.auth.model;
+package com.unesp.rc.homework.auth.model;
 
 import java.io.Serializable;
 
