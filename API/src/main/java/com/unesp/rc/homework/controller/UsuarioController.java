@@ -1,5 +1,10 @@
 package com.unesp.rc.homework.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.NamedType;
+import com.unesp.rc.homework.model.Aluno;
+import com.unesp.rc.homework.model.Professor;
 import com.unesp.rc.homework.model.Usuario;
 import com.unesp.rc.homework.repository.UsuarioRepository;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +31,13 @@ public class UsuarioController {
     }   
     
     @PostMapping("/usuarios/login")
-    public Optional<Usuario> authenticate(@RequestBody Usuario usuario) {
-        
-        return usuarioRepository.authenticate(usuario.getLogin(),usuario.getSenha());
+    public Usuario authenticate(@RequestBody Usuario usuario) throws JsonProcessingException {
+        Usuario user = usuarioRepository.authenticate(usuario.getLogin(),usuario.getSenha());
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerSubtypes(new NamedType(Aluno.class, "Aluno"));
+        mapper.registerSubtypes(new NamedType(Professor.class, "Professor"));
+        String json = mapper.writeValueAsString(user);
+        user = mapper.readValue(json, Usuario.class);
+        return user;
     }
 }

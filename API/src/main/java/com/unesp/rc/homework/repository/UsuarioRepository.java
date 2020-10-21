@@ -11,5 +11,5 @@ import org.springframework.data.jpa.repository.Query;
 public interface UsuarioRepository extends UsuarioBaseRepository<Usuario> {
     
     @Query(value = "SELECT * FROM usuario WHERE login = ?1 AND senha = ?2", nativeQuery = true)
-    public Optional<Usuario> authenticate(String login, String senha);
+    public Usuario authenticate(String login, String senha);
 }

@@ -5,12 +5,17 @@
  */
 package com.example.homework.views.login;
 
+import com.example.homework.data.entity.Aluno;
+import com.example.homework.data.entity.Professor;
 import com.example.homework.data.entity.Usuario;
 import com.example.homework.data.service.UsuarioService;
 import com.example.homework.views.main.MainView;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.NamedType;
+import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.login.AbstractLogin.LoginEvent;
 import com.vaadin.flow.component.login.LoginOverlay;
@@ -80,6 +85,8 @@ public class LoginFormView extends HorizontalLayout {
         
         if(response != null){
             try{
+                mapper.registerSubtypes(new NamedType(Aluno.class, "Aluno"));
+                mapper.registerSubtypes(new NamedType(Professor.class, "Professor"));
                 loggedUser = mapper.readValue(response.body().toString(), Usuario.class);
                 return true;
             }catch(JsonProcessingException ex){
