@@ -6,6 +6,8 @@
 package com.example.homework.data.entity;
 
 import com.example.homework.data.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -20,6 +22,7 @@ public class Turma extends AbstractEntity{
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="turma_id")
+    @JsonBackReference
     private List<Atividade> atividades;
 
     private Date data_inicio_inscricao;

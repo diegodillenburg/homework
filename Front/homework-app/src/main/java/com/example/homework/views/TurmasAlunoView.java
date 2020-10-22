@@ -10,6 +10,7 @@ import com.example.homework.data.entity.Matricula;
 import com.example.homework.data.entity.Turma;
 import com.example.homework.data.service.MatriculaService;
 import com.example.homework.data.service.TurmaService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -52,7 +53,8 @@ public class TurmasAlunoView extends Div {
             FormLayout component = new FormLayout();
             Button button = new Button(t.getNome());
             button.addClickListener(e ->{
-                ;
+                AtividadeTurmaAlunoView dialog = new AtividadeTurmaAlunoView(t);
+                dialog.open();
             });
             component.add(button, 2);
             layout.add(component);

@@ -6,6 +6,7 @@
 package com.example.homework.data.entity;
 
 import com.example.homework.data.AbstractEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.List;
 import javax.persistence.*;
 
