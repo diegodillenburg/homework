@@ -15,7 +15,6 @@ public class Comentario{
     private Long atividade_id;
 
     @ManyToOne
-    @JsonBackReference
     private Usuario usuario;
 
     public Long getId() { return id; }
