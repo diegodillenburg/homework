@@ -1,31 +1,39 @@
 package com.unesp.rc.homework.auth;
 
+import com.unesp.rc.homework.repository.UsuarioRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.unesp.rc.homework.model.Usuario;
 
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
-
-  private PasswordEncoder passwordEncoder;
+    
+    
+     private PasswordEncoder passwordEncoder;
 
   public JwtUserDetailsService(PasswordEncoder passwordEncoder) {
     this.passwordEncoder = passwordEncoder;
   }
 
-  @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    if ("felipe".equals(username)) {
-       //Aqui estamos setando o valor de um user e sua senha encriptada
-      return new User("felipe", passwordEncoder.encode("123456"),
-          new ArrayList<>());
-    } else {
-      throw new UsernameNotFoundException("User not found with username: " + username);
-    }
-  }
+    @Autowired
+    private UsuarioRepository usuarioRepository;;
+	
+	@Override
+	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+                com.unesp.rc.homework.model.Usuario user =  usuarioRepository.authenticateJwt(login);
+		
+		if (user.getLogin().equals(login)) {
+			return new User(login,  passwordEncoder.encode(user.getSenha()),
+					new ArrayList<>());
+		} else {
+			throw new UsernameNotFoundException("User not found with email: " + login);
+		}                 
+        }
 }

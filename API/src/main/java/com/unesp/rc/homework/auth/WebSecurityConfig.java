@@ -53,9 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable()
 // Não cheque essas requisições
             .authorizeRequests()
-            .antMatchers("/authenticate").permitAll().
+            .antMatchers(org.springframework.http.HttpMethod.POST, "/authenticate", "/professores", "/alunos").permitAll()
 // Qualquer outra requisição deve ser checada
-    anyRequest().authenticated().and().
+    .anyRequest().authenticated().and().
                 exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
