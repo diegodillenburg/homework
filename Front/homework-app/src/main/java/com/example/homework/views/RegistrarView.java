@@ -5,15 +5,10 @@
  */
 package com.example.homework.views;
 
-import com.vaadin.flow.component.Component;
-import com.example.homework.data.entity.Address;
 import com.example.homework.data.entity.Aluno;
 import com.example.homework.data.entity.Professor;
-import com.example.homework.data.entity.Usuario;
-import com.example.homework.data.service.AddressService;
 import com.example.homework.data.service.AlunoService;
 import com.example.homework.data.service.ProfessorService;
-import com.example.homework.data.service.UsuarioService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -25,10 +20,9 @@ import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.example.homework.views.MainView;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.radiobutton.RadioGroupVariant;
 import com.vaadin.flow.component.textfield.PasswordField;
@@ -70,9 +64,16 @@ class RegistrarView extends Div {
         add(createFormLayout());
         add(createButtonLayout());
         
+        cancel.addClickListener(e ->{
+            UI.getCurrent().removeAll();
+            UI.getCurrent().navigate(MainCardView.class);
+        });
+        
         save.addClickListener(e -> {
             registrar();
             Notification.show("Usuario salvo.");
+            UI.getCurrent().removeAll();
+            UI.getCurrent().navigate(MainCardView.class);
         });
     } 
 

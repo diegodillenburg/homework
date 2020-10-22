@@ -11,6 +11,7 @@ import com.example.homework.data.service.ProfessorService;
 import com.example.homework.data.service.TurmaService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -25,6 +26,7 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.theme.lumo.Lumo;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,6 +60,7 @@ public class MatriculaView extends Div{
         turmas.forEach((t) -> {
             FormLayout component = new FormLayout();
             Button button = new Button("Se inscreva na disciplina: " + t.getNome());
+            button.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
             button.addClickListener(e ->{
                 long id_aluno = ((Aluno) MainCardView.loggedUsuario).getId();
                 Matricula matricula = new Matricula();
@@ -65,6 +68,7 @@ public class MatriculaView extends Div{
                 matricula.setTurmaId(t.getId());
                 matriculaService.save(matricula);
                 Notification.show("Você se matriculou na disciplina: " + t.getNome());
+                button.setEnabled(false);
             });
             component.add(button, 2);
             layout.add(component);
