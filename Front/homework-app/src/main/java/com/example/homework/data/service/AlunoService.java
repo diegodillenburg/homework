@@ -16,7 +16,10 @@ import java.net.http.HttpResponse;
  */
 public class AlunoService {
     
+        public String token = "null";
+    
     public HttpResponse saveAluno(Aluno aluno){
+        
         
         HttpRequestClass resquestClass = new HttpRequestClass();
         
@@ -30,7 +33,7 @@ public class AlunoService {
          } catch (JsonProcessingException e) {
              e.printStackTrace();
          }
-        HttpResponse retorno = resquestClass.request("POST", "alunos", json);
+        HttpResponse retorno = resquestClass.request("POST", "alunos", json, token );
              
         return retorno;
     }

@@ -8,13 +8,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.http.HttpResponse;
 import org.springframework.stereotype.Service;
 import org.vaadin.artur.helpers.CrudService;
-import java.util.ArrayList;
-import org.json.simple.JSONObject;
+
 
 @Service
 public class UsuarioService extends CrudService<Usuario, Integer> {
 
     private UsuarioRepository repository;
+    
+    public String token = "null";
 
     public UsuarioService() {
         this.repository = repository;
@@ -24,12 +25,7 @@ public class UsuarioService extends CrudService<Usuario, Integer> {
     protected UsuarioRepository getRepository() {
         return repository;
     }   
-    
-    public ArrayList<JSONObject> getRequest(){
-        HttpRequestClass resquestClass = new HttpRequestClass();
-        return null;
-    }
-    
+        
     public HttpResponse autenticar(String login, String senha){
         
         HttpRequestClass resquestClass = new HttpRequestClass();
@@ -48,9 +44,23 @@ public class UsuarioService extends CrudService<Usuario, Integer> {
          } catch (JsonProcessingException e) {
              e.printStackTrace();
          }
-        HttpResponse retorno = resquestClass.request("POST", "authenticate", json);
-             
-        return retorno;
+        HttpResponse retorno = resquestClass.request("POST", "authenticate", json, token);
+        
+        token = tokenSplit((String) retorno.body());
+        
+        HttpResponse retorno2 = resquestClass.request("POST", "usuarios/login", json, token);
+       
+       
+       
+        return retorno2;
+    }
+    
+    public String tokenSplit(String token){
+        token = token.substring(10);
+        String [] novo = token.split("\"");
+        token = "Bearer " + novo[0];
+        
+        return token;
     }
 
 }

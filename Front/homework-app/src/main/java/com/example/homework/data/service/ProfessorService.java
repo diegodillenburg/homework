@@ -16,6 +16,7 @@ import java.net.http.HttpResponse;
  * @author Spiga
  */
 public class ProfessorService {
+    public String token = "null";
     
     public HttpResponse saveProfessor(Professor professor){
         
@@ -31,7 +32,7 @@ public class ProfessorService {
          } catch (JsonProcessingException e) {
              e.printStackTrace();
          }
-        HttpResponse retorno = resquestClass.request("POST", "professores", json);
+        HttpResponse retorno = resquestClass.request("POST", "professores", json, token);
              
         return retorno;
     }

@@ -24,19 +24,19 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 public class HttpRequestClass {
     
     private String apiHost = "http://localhost:8080/";
-    
-    public HttpResponse request(String method, String path, String body){
+        
+    public HttpResponse request(String method, String path, String body, String token){
         switch (method){
             case "GET":
-                return getMethod(path);
+                return getMethod(path, token);
             case "POST":
-                return postMethod(path, body);
+                return postMethod(path, body, token);
             default:
                 return null;
         }
     }
     
-    private HttpResponse getMethod(String path){
+    private HttpResponse getMethod(String path, String token){
         HttpResponse response = null;
         try{
             CloseableHttpClient httpClient = HttpClientBuilder.create().build();
@@ -51,7 +51,7 @@ public class HttpRequestClass {
         }
     }
     
-    private HttpResponse postMethod(String path, String body){
+    private HttpResponse postMethod(String path, String body, String token){
         try{
             
             ObjectMapper objectMapper = new ObjectMapper();
@@ -62,7 +62,7 @@ public class HttpRequestClass {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(apiHost + path))
                     .header("Content-Type", "application/json")
-                    .header("Cookie", "cookie teste")
+                    .header("Authorization", token)
                     .POST(HttpRequest.BodyPublishers.ofString(body))
                     .build();
 
