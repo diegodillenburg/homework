@@ -87,8 +87,11 @@ public class MainCardView extends VerticalLayout implements RouterLayout{
             
             if (isAuthenticated) {
                 component.close();
-                if(true)
+                Class u = (MainCardView.loggedUsuario).getClass();
+                if(u.equals(Professor.class))
                     UI.getCurrent().navigate(ProfessorView.class);
+                else if(u.equals(Aluno.class))
+                    UI.getCurrent().navigate(AlunoView.class);
             } else {
                 component.setError(true);
             }

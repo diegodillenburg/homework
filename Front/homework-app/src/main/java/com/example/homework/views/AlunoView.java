@@ -1,12 +1,16 @@
 
 package com.example.homework.views;
 
+import com.example.homework.data.entity.Aluno;
+import com.example.homework.data.entity.Matricula;
 import java.util.Optional;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.H1;
@@ -25,7 +29,7 @@ import com.vaadin.flow.router.RouterLink;
  */
 @JsModule("./styles/shared-styles.js")
 @CssImport("./styles/views/main/main-view.css")
-@PageTitle("Página do Professor")
+@PageTitle("Página do Aluno")
 @Route(value = "aluno")
 public class AlunoView extends AppLayout{
 
@@ -34,8 +38,11 @@ public class AlunoView extends AppLayout{
     public static VerticalLayout menuBar;
 
     private H1 viewTitle;
-
+    
+    public static Aluno loggedAluno = new Aluno();
+    
     public AlunoView() {
+        loggedAluno = (Aluno) MainCardView.loggedUsuario;
         setPrimarySection(Section.DRAWER);
         addToNavbar(true, createHeaderContent());
         menu = createMenu();
@@ -49,10 +56,14 @@ public class AlunoView extends AppLayout{
         layout.setWidthFull();
         layout.setSpacing(false);
         layout.setAlignItems(FlexComponent.Alignment.CENTER);
-        layout.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
+        layout.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
         layout.add(new DrawerToggle());
+        
+        
         viewTitle = new H1();
         layout.add(viewTitle);
+        
+        layout.add(createLogout());
         
         return layout;
     }
@@ -79,8 +90,9 @@ public class AlunoView extends AppLayout{
 
     private Component[] createMenuItems() {
         return new Tab[] {
-            createTab("Pesquisar", SearchView.class),
-            createTab("Pesquisar Turmas", TurmaAlunoView.class)
+            createTab("Matricular", MatriculaView.class),
+            createTab("Turmas matriculadas", TurmasAlunoView.class),
+            
         };
     }
     
@@ -107,6 +119,18 @@ public class AlunoView extends AppLayout{
 
     private String getCurrentPageTitle() {
         return getContent().getClass().getAnnotation(PageTitle.class).value();
+    }
+
+    private Button createLogout() {
+        
+        Button logout = new Button("Logout");
+        logout.addClickListener(e ->{
+            MainCardView.loggedUsuario = null;
+            MainCardView.token = "null";
+            UI.getCurrent().removeAll();
+            UI.getCurrent().navigate(MainCardView.class);
+        });
+        return logout;
     }
 
 }

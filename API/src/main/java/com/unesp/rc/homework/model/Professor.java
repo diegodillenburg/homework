@@ -1,10 +1,14 @@
 package com.unesp.rc.homework.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import javax.persistence.*;
 
 @Entity
 @JsonTypeName("Professor")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,
+              include = JsonTypeInfo.As.PROPERTY,
+              property = "type")
 public class Professor extends Usuario{
 
     private String departamento;

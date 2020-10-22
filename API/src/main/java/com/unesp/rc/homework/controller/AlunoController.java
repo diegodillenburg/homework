@@ -31,4 +31,9 @@ public class AlunoController {
         return alunoRepository.findById(alunoId);
     }
     
+    @PutMapping("/alunos/turma/")
+    public Aluno cadastrasAlunoEmTurma(@RequestBody Aluno aluno) {
+        return alunoRepository.save(aluno);
+    }
+    
 }

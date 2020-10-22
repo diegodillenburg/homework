@@ -59,4 +59,20 @@ public class TurmaService {
         }
         return turmas;
     }
+
+    public List<Turma> getAllByAluno(long id_aluno) {
+        List<Turma> turmas = new ArrayList<>();
+        HttpRequestClass resquestClass = new HttpRequestClass();
+        HttpResponse retorno = resquestClass.request("GET", "turmas?aluno_id="+id_aluno, "", token);
+        
+        if(retorno != null){
+            try{
+                turmas = Arrays.asList(mapper.readValue(retorno.body().toString(), Turma[].class));
+                return turmas;
+            }catch(JsonProcessingException ex){
+                return null;
+            }
+        }
+        return turmas;
+    }
 }

@@ -26,6 +26,8 @@ public class HttpRequestClass {
                 return getMethod(path, token);
             case "POST":
                 return postMethod(path, body, token);
+            case "PUT":
+                return putMethod(path, body, token);
             default:
                 return null;
         }
@@ -38,7 +40,7 @@ public class HttpRequestClass {
             
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(apiHost + path))
-                    .header("Authorization", "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZWxpcGUiLCJleHAiOjE2MDMzNDY5MjYsImlhdCI6MTYwMzMyODkyNn0.aywk6JTk_GE9mS14qPbWdHOimyG1JqAQGMc9kU1AhqMtqfFeWjiNGDxvg7n9R4mhEws3889eSJy9ZDIg0XQa3A")
+                    .header("Authorization", token)
                     .header("Content-Type", "application/json")
                     .GET()
                     .build();
@@ -62,6 +64,26 @@ public class HttpRequestClass {
                     .header("Content-Type", "application/json")
                     .header("Authorization", token)
                     .POST(HttpRequest.BodyPublishers.ofString(body))
+                    .build();
+            
+            HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            
+            return response;
+        }
+        catch(Exception e){
+            return null;
+        }
+    }
+
+    private HttpResponse putMethod(String path, String body, String token) {try{
+            
+            HttpClient client = HttpClient.newHttpClient();
+            
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(apiHost + path))
+                    .header("Content-Type", "application/json")
+                    .header("Authorization", token)
+                    .PUT(HttpRequest.BodyPublishers.ofString(body))
                     .build();
             
             HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());

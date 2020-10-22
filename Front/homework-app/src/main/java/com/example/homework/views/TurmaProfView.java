@@ -83,7 +83,7 @@ public class TurmaProfView extends Div{
         
         save.addClickListener(e -> {
             saveTurma();
-            Notification.show("Usuario salvo.");
+            Notification.show("Turma nova cadastrada");
         });
         return formLayout;
     }

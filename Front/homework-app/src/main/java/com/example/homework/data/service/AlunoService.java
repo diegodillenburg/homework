@@ -58,4 +58,45 @@ public class AlunoService {
         return alunos;
     }
     
+    public Boolean update(Aluno aluno) {
+        HttpRequestClass resquestClass = new HttpRequestClass();
+        
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        
+        try {
+             json = mapper.writeValueAsString(aluno);
+             System.out.println("ResultingJSONstring = " + json);
+         } catch (JsonProcessingException e) {
+             e.printStackTrace();
+         }
+        
+        HttpResponse retorno = resquestClass.request("PUT", "alunos/turma", json, token);
+        
+        if(retorno != null){
+            try{
+                aluno = mapper.readValue(retorno.body().toString(), Aluno.class);
+                return true;
+            }catch(JsonProcessingException ex){
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public Aluno findById(long id_aluno) {
+        Aluno aluno = new Aluno();
+        HttpRequestClass resquestClass = new HttpRequestClass();
+        HttpResponse retorno = resquestClass.request("GET", "alunos/" + id_aluno, "", token);
+        
+        if(retorno != null){
+            try{
+                aluno = mapper.readValue(retorno.body().toString(), Aluno.class);
+                return aluno;
+            }catch(JsonProcessingException ex){
+                return null;
+            }
+        }
+        return aluno;
+    }    
 }

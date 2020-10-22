@@ -9,8 +9,10 @@ import java.util.Optional;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.H1;
@@ -54,10 +56,11 @@ public class ProfessorView extends AppLayout{
         layout.setWidthFull();
         layout.setSpacing(false);
         layout.setAlignItems(FlexComponent.Alignment.CENTER);
-        layout.setJustifyContentMode(FlexComponent.JustifyContentMode.START);
+        layout.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
         layout.add(new DrawerToggle());
         viewTitle = new H1();
         layout.add(viewTitle);
+        layout.add(createLogout());
         
         return layout;
     }
@@ -84,8 +87,7 @@ public class ProfessorView extends AppLayout{
 
     private Component[] createMenuItems() {
         return new Tab[] {
-            createTab("Pesquisar", SearchView.class),
-            createTab("Turmas", TurmaProfView.class)
+            createTab("Cadastro de turmas", TurmaProfView.class)
         };
     }
     
@@ -113,5 +115,16 @@ public class ProfessorView extends AppLayout{
     private String getCurrentPageTitle() {
         return getContent().getClass().getAnnotation(PageTitle.class).value();
     }
-
+    
+    private Button createLogout() {
+        
+        Button logout = new Button("Logout");
+        logout.addClickListener(e ->{
+            MainCardView.loggedUsuario = null;
+            MainCardView.token = "null";
+            UI.getCurrent().removeAll();
+            UI.getCurrent().navigate(MainCardView.class);
+        });
+        return logout;
+    }
 }

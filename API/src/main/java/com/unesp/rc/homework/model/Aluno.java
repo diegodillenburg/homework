@@ -1,11 +1,15 @@
 package com.unesp.rc.homework.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
 import javax.persistence.*;
 
 @Entity
 @JsonTypeName("Aluno")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,
+              include = JsonTypeInfo.As.PROPERTY,
+              property = "type")
 public class Aluno extends Usuario{
     
     private String periodo;
