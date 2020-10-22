@@ -1,5 +1,8 @@
 package com.unesp.rc.homework.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
@@ -21,7 +24,8 @@ public class Aluno extends Usuario{
               joinColumns={@JoinColumn(name="aluno_id",
                referencedColumnName="id")},
               inverseJoinColumns={@JoinColumn(name="turma_id",
-                referencedColumnName="id")})
+                referencedColumnName="id")}) 
+    @JsonIgnoreProperties("turmas")
     private List<Turma> turmas;
     
     public Aluno(){

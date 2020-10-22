@@ -1,5 +1,9 @@
 package com.unesp.rc.homework.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +19,7 @@ public class Comentario {
     private Long atividade_id;
 
     @ManyToOne
+    @JsonBackReference
     private Usuario usuario;
 
     public Comentario() { super(); }
@@ -31,9 +36,9 @@ public class Comentario {
 
     public void setId(Long id) { this.id = id; }
 
-    public Long getAtividadeId() { return atividade_id; }
+    public Long getAtividade_id() { return atividade_id; }
 
-    public void setAtividadeId(Long atividade_id) { this.atividade_id = atividade_id; }
+    public void setAtividade_id(Long atividade_id) { this.atividade_id = atividade_id; }
 
     public Usuario getUsuario() { return usuario; }
 

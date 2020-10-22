@@ -8,24 +8,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.http.HttpResponse;
 import org.springframework.stereotype.Service;
-import org.vaadin.artur.helpers.CrudService;
 
 
 @Service
-public class UsuarioService extends CrudService<Usuario, Integer> {
-
-    private UsuarioRepository repository;
+public class UsuarioService {
     
     private String token = MainCardView.token;
-
-    public UsuarioService() {
-        this.repository = repository;
-    }
-
-    @Override
-    protected UsuarioRepository getRepository() {
-        return repository;
-    }   
         
     public HttpResponse autenticar(String login, String senha){
         
@@ -62,5 +50,24 @@ public class UsuarioService extends CrudService<Usuario, Integer> {
         
         return token;
     }
-
+    
+    public Usuario getUserByComment(Long id){
+        
+        Usuario user = new Usuario();
+        
+        HttpRequestClass requestClass = new HttpRequestClass();
+        HttpResponse retorno = requestClass.request("GET", "comentarios/" + id, "", token);
+        
+        ObjectMapper mapper = new ObjectMapper();
+        if(retorno != null){
+            try{
+                user = mapper.readValue(retorno.body().toString(), Usuario.class);
+                return user;
+            }catch(JsonProcessingException ex){
+                return null;
+            }
+        }       
+        
+        return user;
+    }
 }

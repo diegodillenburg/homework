@@ -1,27 +1,30 @@
 package com.example.homework.data.entity;
 
 import com.example.homework.data.AbstractEntity;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 
 @Entity
-public class Comentario extends AbstractEntity{
+public class Comentario{
+    
+    @Id
+    private Long id;
 
     private String texto;
 
-    @ManyToOne
-    @JsonManagedReference
-    private Atividade atividade;
+    private Long atividade_id;
 
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference
     private Usuario usuario;
 
-    public Atividade getAtividade() { return atividade; }
+    public Long getId() { return id; }
 
-    public void setAtividade(Atividade atividade) { this.atividade = atividade; }
+    public void setId(Long id) { this.id = id; }
+
+    public Long getAtividade_id() { return atividade_id; }
+
+    public void setAtividade_id(Long atividade_id) { this.atividade_id = atividade_id; }
 
     public Usuario getUsuario() { return usuario; }
 

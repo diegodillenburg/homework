@@ -6,6 +6,8 @@
 package com.example.homework.views;
 
 import com.example.homework.data.entity.Atividade;
+import com.example.homework.data.entity.Usuario;
+import com.example.homework.data.service.UsuarioService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -27,6 +29,8 @@ import java.util.Optional;
  */
 public class AtividadeView extends Dialog{
     
+    private UsuarioService usuarioService = new UsuarioService();
+    
     private Button sendButton = new Button("Enviar");
     
     public AtividadeView(Optional<Atividade> atividade) {
@@ -41,29 +45,42 @@ public class AtividadeView extends Dialog{
 
         
         this.setWidth("50%");
-        this.setHeight("50%");
+        this.setHeight("80%");
         this.setDraggable(false);
         this.setModal(true);
         this.add(form);
         this.add(createComentariosBox(atividade.get()));
+        
+        sendButton.addClickListener(e -> {
+            
+        });
+        sendButton.setWidthFull();
+        this.add(sendButton);
     }
     
     private VerticalLayout createComentariosBox(Atividade atividade){
             
         VerticalLayout vertical = new VerticalLayout();
+        vertical.setHeight("100%");
+        vertical.setSizeUndefined();
         vertical.getStyle().set("border", "1px solid #9E9E9E");
         atividade.getComentarios().forEach((c) -> {
+            Usuario user = usuarioService.getUserByComment(c.getId());
             VerticalLayout lay = new VerticalLayout();
+            
             TextField comentario = new TextField();
-            Component component1 = new TextArea();
+            comentario.setTitle(user.getNome());
+            comentario.setValue(c.getTexto());
             lay.add(comentario);
-            lay.add(component1);
-            if (c.getUsuario().equals(MainView.loggedUser))
+            
+            if (user.equals(MainCardView.loggedUsuario))
                 lay.setDefaultHorizontalComponentAlignment(
                 FlexComponent.Alignment.END);
             else
                 lay.setDefaultHorizontalComponentAlignment(
                 FlexComponent.Alignment.START);
+            
+            vertical.add(lay);
         });
         return vertical;
     }

@@ -5,6 +5,7 @@
  */
 package com.example.homework.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
 import javax.persistence.*;
@@ -22,7 +23,8 @@ public class Aluno extends Usuario{
               joinColumns={@JoinColumn(name="aluno_id",
                referencedColumnName="id")},
               inverseJoinColumns={@JoinColumn(name="turma_id",
-                referencedColumnName="id")})
+                referencedColumnName="id")}) 
+    @JsonIgnoreProperties("turmas")
     private List<Turma> turmas;
 
     public String getPeriodo() {

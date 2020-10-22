@@ -22,7 +22,6 @@ public class Turma extends AbstractEntity{
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="turma_id")
-    @JsonBackReference
     private List<Atividade> atividades;
 
     private Date data_inicio_inscricao;
