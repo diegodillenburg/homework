@@ -12,10 +12,10 @@ public class ComentarioController {
     @Autowired
     ComentarioRepository comentarioRepository;
 
-    @GetMapping("/comentarios")
-    public List<Comentario> getAllComentarios(@RequestParam(name = "atividade_id") Long atividade_id) {
-        return comentarioRepository.findByAtividadeId(atividade_id);
-    }
+//    @GetMapping("/comentarios")
+//    public List<Comentario> getAllComentarios(@RequestParam(name = "atividade_id") Long atividade_id) {
+//        return comentarioRepository.findByAtividadeId(atividade_id);
+//    }
 
     @PostMapping("/comentarios")
     public Comentario createComentario(@RequestBody Comentario comentario) {
