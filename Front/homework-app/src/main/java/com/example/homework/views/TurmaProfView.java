@@ -10,6 +10,7 @@ import com.example.homework.data.entity.Professor;
 import com.example.homework.data.entity.Turma;
 import com.example.homework.data.service.AlunoService;
 import com.example.homework.data.service.ProfessorService;
+import com.example.homework.data.service.TurmaService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -53,6 +54,7 @@ public class TurmaProfView extends Div{
     
     private ProfessorService professorService = new ProfessorService();
     private AlunoService alunoService = new AlunoService();
+    private TurmaService turmaService = new TurmaService();
     
     public TurmaProfView() {
         setId("person-form-view");
@@ -96,6 +98,8 @@ public class TurmaProfView extends Div{
         turma.setMax_alunos(Integer.parseInt(max_alunos.getValue()));
         turma.setNome(nome.getValue());
         turma.setProfessor((Professor) MainCardView.loggedUsuario);
+        
+        turmaService.save(turma);
         
         }
     

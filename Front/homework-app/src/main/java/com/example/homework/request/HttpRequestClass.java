@@ -20,19 +20,19 @@ public class HttpRequestClass {
     
     public static String authorization = "";
     
-    public HttpResponse request(String method, String path, String body){
+    public HttpResponse request(String method, String path, String body, String token){
         switch (method){
             case "GET":
-                return getMethod(path);
+                return getMethod(path, token);
             case "POST":
-                return postMethod(path, body, "");
+                return postMethod(path, body, token);
             default:
                 return null;
         }
     }
     
-    private HttpResponse getMethod(String path){
-
+    private HttpResponse getMethod(String path, String token){
+        HttpResponse response = null;
         try{
             HttpClient client = HttpClient.newHttpClient();
             
@@ -43,7 +43,7 @@ public class HttpRequestClass {
                     .GET()
                     .build();
             
-            HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
             
             return response;
         }
@@ -52,15 +52,15 @@ public class HttpRequestClass {
         }
     }
     
-    private HttpResponse postMethod(String path, String body, String auth){
+    private HttpResponse postMethod(String path, String body, String token){
         try{
             
             HttpClient client = HttpClient.newHttpClient();
             
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(apiHost + path))
-                    .header("Authorization", "Bearer " + "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZWxpcGUiLCJleHAiOjE2MDMzNDY5MjYsImlhdCI6MTYwMzMyODkyNn0.aywk6JTk_GE9mS14qPbWdHOimyG1JqAQGMc9kU1AhqMtqfFeWjiNGDxvg7n9R4mhEws3889eSJy9ZDIg0XQa3A")
                     .header("Content-Type", "application/json")
+                    .header("Authorization", token)
                     .POST(HttpRequest.BodyPublishers.ofString(body))
                     .build();
             

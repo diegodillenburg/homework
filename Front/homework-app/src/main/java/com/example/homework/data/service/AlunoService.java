@@ -20,6 +20,8 @@ import java.util.List;
 public class AlunoService {
     
     private ObjectMapper mapper = new ObjectMapper();
+
+    public String token = "null";
     
     public HttpResponse saveAluno(Aluno aluno){
         
@@ -34,7 +36,7 @@ public class AlunoService {
          } catch (JsonProcessingException e) {
              e.printStackTrace();
          }
-        HttpResponse retorno = resquestClass.request("POST", "alunos", json);
+        HttpResponse retorno = resquestClass.request("POST", "alunos", json, token );
              
         return retorno;
     }
@@ -42,7 +44,7 @@ public class AlunoService {
     public List<Aluno> getAll() {
         List<Aluno> alunos = new ArrayList<>();
         HttpRequestClass resquestClass = new HttpRequestClass();
-        HttpResponse retorno = resquestClass.request("GET", "alunos", "");
+        HttpResponse retorno = resquestClass.request("GET", "alunos", "", token);
         
         if(retorno != null){
             try{

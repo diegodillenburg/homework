@@ -5,7 +5,7 @@
  */
 package com.example.homework.data.service;
 
-import com.example.homework.data.entity.Professor;
+import com.example.homework.data.entity.Turma;
 import com.example.homework.request.HttpRequestClass;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,10 +15,10 @@ import java.net.http.HttpResponse;
  *
  * @author Spiga
  */
-public class ProfessorService {
+public class TurmaService {
     public String token = "null";
     
-    public HttpResponse saveProfessor(Professor professor){
+    public HttpResponse save(Turma turma){
         
         HttpRequestClass resquestClass = new HttpRequestClass();
         
@@ -26,15 +26,14 @@ public class ProfessorService {
         String json = "";
         
         try {
-             json = mapper.writeValueAsString(professor);
+             json = mapper.writeValueAsString(turma);
              System.out.println("ResultingJSONstring = " + json);
              //System.out.println(json);
          } catch (JsonProcessingException e) {
              e.printStackTrace();
          }
-        HttpResponse retorno = resquestClass.request("POST", "professores", json, token);
+        HttpResponse retorno = resquestClass.request("POST", "turmas", json, token);
              
         return retorno;
     }
-    
 }

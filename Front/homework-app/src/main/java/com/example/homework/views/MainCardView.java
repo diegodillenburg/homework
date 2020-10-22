@@ -109,10 +109,10 @@ public class MainCardView extends VerticalLayout implements RouterLayout{
             try{
                 mapper.registerSubtypes(new NamedType(Aluno.class, "Aluno"));
                 mapper.registerSubtypes(new NamedType(Professor.class, "Professor"));
-                MainView.loggedUser = mapper.readValue(response.body().toString(), Usuario.class);
+                MainCardView.loggedUsuario = mapper.readValue(response.body().toString(), Usuario.class);
                 return true;
             }catch(JsonProcessingException ex){
-                return true;
+                return false;
             }
         }
         
