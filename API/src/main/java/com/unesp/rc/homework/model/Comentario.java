@@ -12,19 +12,18 @@ public class Comentario {
 
     private String texto;
 
-    @ManyToOne
-    private Atividade atividade;
+    private Long atividade_id;
 
     @ManyToOne
     private Usuario usuario;
 
     public Comentario() { super(); }
 
-    public Comentario(Long id, String texto, Atividade atividade, Usuario usuario) {
+    public Comentario(Long id, String texto, Long atividade_id, Usuario usuario) {
         super();
         this.id = id;
         this.texto = texto;
-        this.atividade = atividade;
+        this.atividade_id = atividade_id;
         this.usuario = usuario;
     }
 
@@ -32,9 +31,9 @@ public class Comentario {
 
     public void setId(Long id) { this.id = id; }
 
-    public Atividade getAtividade() { return atividade; }
+    public Long getAtividadeId() { return atividade_id; }
 
-    public void setAtividade(Atividade atividade) { this.atividade = atividade; }
+    public void setAtividadeId(Long atividade_id) { this.atividade_id = atividade_id; }
 
     public Usuario getUsuario() { return usuario; }
 
