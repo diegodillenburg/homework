@@ -15,16 +15,12 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.component.upload.Upload;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -48,10 +44,15 @@ public class AtividadeView extends Dialog{
     
     public AtividadeView(Optional<Atividade> atividade) {
         this.atividade = atividade.get();
+        
         FormLayout form = new FormLayout();
-        Upload upload = new Upload();
-        form.add(new H1("Atividade: " + atividade.get().getTitulo()));
-        form.add(new H2("Descrição: " + atividade.get().getDescricao()));
+
+        form.add(new H1("Atividade: " + atividade.get().getTitulo()),2);
+        
+        TextArea area = new TextArea("Descrição: ");
+        area.setValue(atividade.get().getDescricao());
+        area.setReadOnly(true);
+        form.add(area,2);
         form.add(sendButton);
         
         form.add(new Span());
@@ -61,7 +62,6 @@ public class AtividadeView extends Dialog{
         this.setDraggable(false);
         this.setModal(true);
         this.add(form);
-        this.add(upload);
         
         this.add(createComentariosBox());
         populateBox();

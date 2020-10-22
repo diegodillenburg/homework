@@ -5,6 +5,7 @@
  */
 package com.example.homework.views;
 
+import com.example.homework.data.entity.Professor;
 import java.util.Optional;
 
 import com.vaadin.flow.component.Component;
@@ -41,12 +42,15 @@ public class ProfessorView extends AppLayout{
     public static VerticalLayout menuBar;
 
     private H1 viewTitle;
+    
+    public static Professor loggedProf = new Professor();
 
     public ProfessorView() {
         setPrimarySection(Section.DRAWER);
         addToNavbar(true, createHeaderContent());
         menu = createMenu();
         addToDrawer(createDrawerContent(menu));
+        loggedProf = (Professor) MainCardView.loggedUsuario;
     }
 
     private Component createHeaderContent() {
@@ -87,7 +91,8 @@ public class ProfessorView extends AppLayout{
 
     private Component[] createMenuItems() {
         return new Tab[] {
-            createTab("Cadastro de turmas", TurmaProfView.class)
+            createTab("Cadastro de turmas", CadastroTurmaView.class),
+            createTab("Turmas minstradas", TurmasProfessorView.class)
         };
     }
     

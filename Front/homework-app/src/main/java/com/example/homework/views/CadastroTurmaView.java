@@ -38,7 +38,7 @@ import static javassist.CtMethod.ConstParameter.integer;
 @Route(value = "turma", layout = ProfessorView.class)
 @PageTitle("Cadastro de turmas")
 @CssImport("./styles/views/personform/person-form-view.css")
-public class TurmaProfView extends Div{
+public class CadastroTurmaView extends Div{
     
     private TextField nome = new TextField("Disciplina");
     private DatePicker inicio_aulas = new DatePicker("Início das aulas");
@@ -56,7 +56,7 @@ public class TurmaProfView extends Div{
     private AlunoService alunoService = new AlunoService();
     private TurmaService turmaService = new TurmaService();
     
-    public TurmaProfView() {
+    public CadastroTurmaView() {
         setId("person-form-view");
         add(createFormLayout());
     }

@@ -158,6 +158,12 @@
             <version>2.8.6</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.vaadin.olli</groupId>
+            <artifactId>file-download-wrapper</artifactId>
+            <version>3.0.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>

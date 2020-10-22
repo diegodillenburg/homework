@@ -5,8 +5,12 @@
  */
 package com.example.homework.views;
 
+import com.example.homework.data.entity.Aluno;
 import com.example.homework.data.entity.Atividade;
+import com.example.homework.data.entity.Professor;
 import com.example.homework.data.entity.Turma;
+import com.example.homework.data.entity.Usuario;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -16,6 +20,7 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.Icon;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,13 +28,31 @@ import java.util.Date;
  *
  * @author Spiga
  */
-public class AtividadeTurmaAlunoView extends Dialog{
+public class AtividadeTurmaView extends Dialog{
     
     private Button button = new Button();
     
-    public AtividadeTurmaAlunoView(Turma turma) {
+    private Usuario user = new Usuario();
+    
+    private Turma turma = new Turma();
+    
+    public AtividadeTurmaView(Turma turma) {
+        
+        user = MainCardView.loggedUsuario;
+        this.turma = turma;
+        
         FormLayout form = new FormLayout();
-        form.add(new H1("Turma: " + turma.getNome()),2);
+        
+        Class u = user.getClass();
+        if(u.equals(Professor.class)){
+            form.add(new H1("Turma: " + turma.getNome()));
+            form.add(createAtividade());
+        }
+        else{
+            form.add(new H1("Turma: " + turma.getNome()),2);
+        }
+        
+        
         form.add(new H2("Professor: " + turma.getProfessor().getNome()),2);
         Label label = new Label("Número máximo de alunos: " + Integer.toString(turma.getMax_alunos()));
         
@@ -50,6 +73,10 @@ public class AtividadeTurmaAlunoView extends Dialog{
         this.setDraggable(false);
         this.setModal(true);
         this.add(form);
+    }
+    
+    private void init (String elementType){
+    
     }
     
     private String formatDate(Date date){
@@ -74,6 +101,15 @@ public class AtividadeTurmaAlunoView extends Dialog{
         });
         
         return grid;
+    }
+
+    private Button createAtividade() {
+        Button button = new Button("Criar Atividade");
+        button.addClickListener(e ->{
+            NovaAtividadeView dialog = new NovaAtividadeView(turma);
+            dialog.open();
+        });
+        return button;
     }
     
 }
