@@ -1,6 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.example.homework.views;
 
-import com.example.homework.data.entity.Usuario;
 import java.util.Optional;
 
 import com.vaadin.flow.component.Component;
@@ -9,7 +13,6 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -22,14 +25,14 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 
 /**
- * The main view is a top-level placeholder for other views.
+ *
+ * @author Spiga
  */
 @JsModule("./styles/shared-styles.js")
 @CssImport("./styles/views/main/main-view.css")
-@Route(value = "main-form")
-public class MainView extends AppLayout {
-
-    public static Usuario loggedUser = new Usuario();
+@PageTitle("Página do Professor")
+@Route(value = "professor-view")
+public class ProfessorView extends AppLayout{
     
     public static Tabs menu;
     
@@ -37,7 +40,7 @@ public class MainView extends AppLayout {
 
     private H1 viewTitle;
 
-    public MainView() {
+    public ProfessorView() {
         setPrimarySection(Section.DRAWER);
         addToNavbar(true, createHeaderContent());
         menu = createMenu();
@@ -66,12 +69,7 @@ public class MainView extends AppLayout {
         menuBar.setSpacing(false);
         menuBar.getThemeList().set("spacing-s", true);
         menuBar.setAlignItems(FlexComponent.Alignment.STRETCH);
-        HorizontalLayout logoLayout = new HorizontalLayout();
-        logoLayout.setId("logo");
-        logoLayout.setAlignItems(FlexComponent.Alignment.CENTER);
-        logoLayout.add(new Image("images/logo.png", "Homework App logo"));
-        logoLayout.add(new H1("Homework App"));
-        menuBar.add(logoLayout, menu);
+        menuBar.add(menu);
         return menuBar;
     }
 
@@ -86,9 +84,8 @@ public class MainView extends AppLayout {
 
     private Component[] createMenuItems() {
         return new Tab[] {
-            createTab("Person Form", PersonFormView.class),
-            createTab("Hello World", HelloWorldView.class),
-            createTab("About", AboutView.class)
+            createTab("Pesquisar", SearchView.class),
+            createTab("Turmas", TurmaProfView.class)
         };
     }
     

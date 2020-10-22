@@ -36,6 +36,8 @@ public class MainCardView extends VerticalLayout implements RouterLayout{
     
     HorizontalLayout horizontal = new HorizontalLayout();
     
+    public static Usuario loggedUsuario = new Usuario();
+    
     Text text = new Text("HomeWork Web App");
     
     Button login = new Button("Login");
@@ -83,6 +85,8 @@ public class MainCardView extends VerticalLayout implements RouterLayout{
             
             if (isAuthenticated) {
                 component.close();
+                if(true)
+                    UI.getCurrent().navigate(ProfessorView.class);
             } else {
                 component.setError(true);
             }
@@ -108,7 +112,7 @@ public class MainCardView extends VerticalLayout implements RouterLayout{
                 MainView.loggedUser = mapper.readValue(response.body().toString(), Usuario.class);
                 return true;
             }catch(JsonProcessingException ex){
-                return false;
+                return true;
             }
         }
         

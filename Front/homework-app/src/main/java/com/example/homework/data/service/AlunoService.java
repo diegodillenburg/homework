@@ -10,11 +10,16 @@ import com.example.homework.request.HttpRequestClass;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 /**
  *
  * @author Spiga
  */
 public class AlunoService {
+    
+    private ObjectMapper mapper = new ObjectMapper();
     
     public HttpResponse saveAluno(Aluno aluno){
         
@@ -26,13 +31,28 @@ public class AlunoService {
         try {
              json = mapper.writeValueAsString(aluno);
              System.out.println("ResultingJSONstring = " + json);
-             //System.out.println(json);
          } catch (JsonProcessingException e) {
              e.printStackTrace();
          }
         HttpResponse retorno = resquestClass.request("POST", "alunos", json);
              
         return retorno;
+    }
+
+    public List<Aluno> getAll() {
+        List<Aluno> alunos = new ArrayList<>();
+        HttpRequestClass resquestClass = new HttpRequestClass();
+        HttpResponse retorno = resquestClass.request("GET", "alunos", "");
+        
+        if(retorno != null){
+            try{
+                alunos = Arrays.asList(mapper.readValue(retorno.body().toString(), Aluno[].class));
+                return alunos;
+            }catch(JsonProcessingException ex){
+                return null;
+            }
+        }
+        return alunos;
     }
     
 }

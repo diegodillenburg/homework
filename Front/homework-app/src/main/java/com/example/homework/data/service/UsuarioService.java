@@ -32,7 +32,7 @@ public class UsuarioService extends CrudService<Usuario, Integer> {
     
     public HttpResponse autenticar(String login, String senha){
         
-        HttpRequestClass resquestClass = new HttpRequestClass();
+        HttpRequestClass requestClass = new HttpRequestClass();
         
         Usuario user = new Usuario();
         user.setLogin(login);
@@ -48,8 +48,8 @@ public class UsuarioService extends CrudService<Usuario, Integer> {
          } catch (JsonProcessingException e) {
              e.printStackTrace();
          }
-        HttpResponse retorno = resquestClass.request("POST", "authenticate", json);
-             
+        HttpResponse retorno = requestClass.request("POST", "authenticate", json);
+        
         return retorno;
     }
 

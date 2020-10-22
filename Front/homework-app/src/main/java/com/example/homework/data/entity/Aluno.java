@@ -41,13 +41,13 @@ public class Aluno extends Usuario{
         this.instituicao = instituicao;
     }
 
-//    public List<Turma> getTurmas() {
-//        return turmas;
-//    }
-//
-//    public void setTurmas(List<Turma> turmas) {
-//        this.turmas = turmas;
-//    }
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
+    }
     
     
     

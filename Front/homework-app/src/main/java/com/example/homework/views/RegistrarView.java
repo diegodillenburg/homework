@@ -11,6 +11,7 @@ import com.example.homework.data.entity.Aluno;
 import com.example.homework.data.entity.Professor;
 import com.example.homework.data.entity.Usuario;
 import com.example.homework.data.service.AddressService;
+import com.example.homework.data.service.AlunoService;
 import com.example.homework.data.service.ProfessorService;
 import com.example.homework.data.service.UsuarioService;
 import com.vaadin.flow.component.Component;
@@ -60,6 +61,7 @@ class RegistrarView extends Div {
     private Button save = new Button("Save");
     
     private ProfessorService professorService = new ProfessorService();
+    private AlunoService alunoService = new AlunoService();
     
     public RegistrarView() {
         setId("registrar-view");
@@ -167,6 +169,8 @@ class RegistrarView extends Div {
             aluno.setTelefone(telefone.getValue());
             aluno.setInstituicao(instituicao.getValue());
             aluno.setPeriodo(periodo.getValue());
+            
+            alunoService.saveAluno(aluno);
         
         }
     }
