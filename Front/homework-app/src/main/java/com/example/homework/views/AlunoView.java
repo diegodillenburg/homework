@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.example.homework.views;
 
 import java.util.Optional;
@@ -23,7 +19,6 @@ import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
-
 /**
  *
  * @author Spiga
@@ -31,16 +26,16 @@ import com.vaadin.flow.router.RouterLink;
 @JsModule("./styles/shared-styles.js")
 @CssImport("./styles/views/main/main-view.css")
 @PageTitle("Página do Professor")
-@Route(value = "professor")
-public class ProfessorView extends AppLayout{
-    
+@Route(value = "aluno")
+public class AlunoView extends AppLayout{
+
     public static Tabs menu;
     
     public static VerticalLayout menuBar;
 
     private H1 viewTitle;
 
-    public ProfessorView() {
+    public AlunoView() {
         setPrimarySection(Section.DRAWER);
         addToNavbar(true, createHeaderContent());
         menu = createMenu();
@@ -54,7 +49,7 @@ public class ProfessorView extends AppLayout{
         layout.setWidthFull();
         layout.setSpacing(false);
         layout.setAlignItems(FlexComponent.Alignment.CENTER);
-        layout.setJustifyContentMode(FlexComponent.JustifyContentMode.START);
+        layout.setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
         layout.add(new DrawerToggle());
         viewTitle = new H1();
         layout.add(viewTitle);
@@ -85,7 +80,7 @@ public class ProfessorView extends AppLayout{
     private Component[] createMenuItems() {
         return new Tab[] {
             createTab("Pesquisar", SearchView.class),
-            createTab("Turmas", TurmaProfView.class)
+            createTab("Pesquisar Turmas", TurmaAlunoView.class)
         };
     }
     

@@ -17,7 +17,7 @@ import com.vaadin.flow.router.RouteAlias;
  */
 @Route(value = "search-form", layout = ProfessorView.class)
 @PageTitle("Pesquisa")
-@RouteAlias(value = "professor-view/", layout = ProfessorView.class)
+@RouteAlias(value = "professor/", layout = ProfessorView.class)
 @CssImport("./styles/views/personform/person-form-view.css")
 public class SearchView extends Div{
     

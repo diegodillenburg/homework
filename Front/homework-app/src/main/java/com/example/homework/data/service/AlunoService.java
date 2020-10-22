@@ -7,6 +7,7 @@ package com.example.homework.data.service;
 
 import com.example.homework.data.entity.Aluno;
 import com.example.homework.request.HttpRequestClass;
+import com.example.homework.views.MainCardView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.http.HttpResponse;
@@ -21,7 +22,7 @@ public class AlunoService {
     
     private ObjectMapper mapper = new ObjectMapper();
 
-    public String token = "null";
+    private String token = MainCardView.token;
     
     public HttpResponse saveAluno(Aluno aluno){
         

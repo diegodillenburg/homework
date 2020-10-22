@@ -3,6 +3,7 @@ package com.example.homework.data.service;
 
 import com.example.homework.data.entity.Usuario;
 import com.example.homework.request.HttpRequestClass;
+import com.example.homework.views.MainCardView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.http.HttpResponse;
@@ -15,7 +16,7 @@ public class UsuarioService extends CrudService<Usuario, Integer> {
 
     private UsuarioRepository repository;
     
-    private String token = "null";
+    private String token = MainCardView.token;
 
     public UsuarioService() {
         this.repository = repository;
@@ -47,9 +48,9 @@ public class UsuarioService extends CrudService<Usuario, Integer> {
         
         HttpResponse retorno = requestClass.request("POST", "authenticate", json, "null");
         
-        token = tokenSplit((String) retorno.body());
+        MainCardView.token = tokenSplit((String) retorno.body());
         
-        HttpResponse retorno2 = requestClass.request("POST", "usuarios/login", json, token);
+        HttpResponse retorno2 = requestClass.request("POST", "usuarios/login", json, MainCardView.token);
        
         return retorno2;
     }

@@ -7,16 +7,23 @@ package com.example.homework.data.service;
 
 import com.example.homework.data.entity.Turma;
 import com.example.homework.request.HttpRequestClass;
+import com.example.homework.views.MainCardView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
  * @author Spiga
  */
 public class TurmaService {
-    public String token = "null";
+    
+    private String token = MainCardView.token;
+    
+    private ObjectMapper mapper = new ObjectMapper();
     
     public HttpResponse save(Turma turma){
         
@@ -35,5 +42,21 @@ public class TurmaService {
         HttpResponse retorno = resquestClass.request("POST", "turmas", json, token);
              
         return retorno;
+    }
+
+    public List<Turma> getAll() {
+        List<Turma> turmas = new ArrayList<>();
+        HttpRequestClass resquestClass = new HttpRequestClass();
+        HttpResponse retorno = resquestClass.request("GET", "turmas", "", token);
+        
+        if(retorno != null){
+            try{
+                turmas = Arrays.asList(mapper.readValue(retorno.body().toString(), Turma[].class));
+                return turmas;
+            }catch(JsonProcessingException ex){
+                return null;
+            }
+        }
+        return turmas;
     }
 }

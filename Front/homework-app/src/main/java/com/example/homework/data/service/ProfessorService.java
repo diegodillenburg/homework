@@ -7,6 +7,7 @@ package com.example.homework.data.service;
 
 import com.example.homework.data.entity.Professor;
 import com.example.homework.request.HttpRequestClass;
+import com.example.homework.views.MainCardView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.http.HttpResponse;
@@ -16,7 +17,7 @@ import java.net.http.HttpResponse;
  * @author Spiga
  */
 public class ProfessorService {
-    public String token = "null";
+    private String token = MainCardView.token;
     
     public HttpResponse saveProfessor(Professor professor){
         

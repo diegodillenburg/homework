@@ -33,6 +33,8 @@ import java.net.http.HttpResponse;
 @PWA(name = "Homework", shortName = "Homework", enableInstallPrompt = false)
 @Route("")
 public class MainCardView extends VerticalLayout implements RouterLayout{
+
+    public static String token = "null";
     
     HorizontalLayout horizontal = new HorizontalLayout();
     

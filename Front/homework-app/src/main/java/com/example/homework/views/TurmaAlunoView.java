@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.example.homework.views;
 
 import com.example.homework.data.entity.Aluno;
@@ -20,6 +16,8 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
@@ -31,14 +29,10 @@ import java.util.Date;
 import java.util.List;
 import static javassist.CtMethod.ConstParameter.integer;
 
-/**
- *
- * @author Spiga
- */
-@Route(value = "turma", layout = ProfessorView.class)
+@Route(value = "turma-aluno", layout = AlunoView.class)
 @PageTitle("Cadastro de turmas")
 @CssImport("./styles/views/personform/person-form-view.css")
-public class TurmaProfView extends Div{
+public class TurmaAlunoView extends Div{
     
     private TextField nome = new TextField("Disciplina");
     private DatePicker inicio_aulas = new DatePicker("Início das aulas");
@@ -56,24 +50,9 @@ public class TurmaProfView extends Div{
     private AlunoService alunoService = new AlunoService();
     private TurmaService turmaService = new TurmaService();
     
-    public TurmaProfView() {
+    public TurmaAlunoView() {
         setId("person-form-view");
-        add(createFormLayout());
-    }
-    private FormLayout createFormLayout(){
-        FormLayout formLayout = new FormLayout();
-        
-        formLayout.add(nome, 2);
-        formLayout.add(inicio_aulas, fim_aulas);
-        formLayout.add(inicio_inscricoes, fim_inscricoes);
-        
-        max_alunos.setPattern("\\d*");
-        max_alunos.setErrorMessage("Somente números");
-        
-        formLayout.add(max_alunos);
-        formLayout.add(buttonLayout(), 2);
-        
-        return formLayout;
+        addLayouts();
     }
 
     private Component buttonLayout() {
@@ -102,5 +81,24 @@ public class TurmaProfView extends Div{
         turmaService.save(turma);
         
         }
+
+    private void addLayouts() {
+        VerticalLayout layout = new VerticalLayout();
+        layout.getStyle().set("border", "1px solid #9E9E9E");
+        layout.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
+
+        // the default is Alignment.START
+        layout.setDefaultHorizontalComponentAlignment(
+                FlexComponent.Alignment.STRETCH);
+
+        List<Turma> turmas = turmaService.getAll();
+        FormLayout component1 = new FormLayout();
+        FormLayout component2 = new FormLayout();
+        FormLayout component3 = new FormLayout();
+
+        layout.add(component1, component2, component3);
+
+        add(layout);
+    }
     
 }
