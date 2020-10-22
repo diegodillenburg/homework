@@ -7,23 +7,15 @@ package com.example.homework.request;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import org.apache.http.impl.cookie.BasicClientCookie;
 
 /**
  *
@@ -65,11 +57,12 @@ public class HttpRequestClass {
             ObjectMapper objectMapper = new ObjectMapper();
             String requestBody = objectMapper
                     .writeValueAsString(body);
-
+            
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(apiHost + path))
                     .header("Content-Type", "application/json")
+                    .header("Cookie", "cookie teste")
                     .POST(HttpRequest.BodyPublishers.ofString(body))
                     .build();
 

@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
@@ -56,14 +57,18 @@ public class MainCardView extends VerticalLayout implements RouterLayout{
         
         registrar.addThemeVariants(ButtonVariant.LUMO_LARGE,
         ButtonVariant.LUMO_PRIMARY);
+        registrar.addClickListener(e ->{
+            UI.getCurrent().navigate(RegistrarView.class);
+        });
         
         setHeightFull();
         setWidthFull();
         
         horizontal.add(createLoginButton(), createRegistrarButton());
-        horizontal.setVerticalComponentAlignment(Alignment.CENTER, login, registrar);
-        
+        horizontal.setVerticalComponentAlignment(Alignment.CENTER, login, registrar);    
+
         add(text, horizontal);
+
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
     }

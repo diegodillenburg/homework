@@ -18,6 +18,7 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.PWA;
 
@@ -26,6 +27,7 @@ import com.vaadin.flow.server.PWA;
  */
 @JsModule("./styles/shared-styles.js")
 @CssImport("./styles/views/main/main-view.css")
+@Route(value = "main-form")
 public class MainView extends AppLayout {
 
     public static Usuario loggedUser = new Usuario();
@@ -88,7 +90,6 @@ public class MainView extends AppLayout {
     private Component[] createMenuItems() {
         return new Tab[] {
             createTab("Person Form", PersonFormView.class),
-            createTab("Address Form", AddressFormView.class),
             createTab("Hello World", HelloWorldView.class),
             createTab("About", AboutView.class)
         };

@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.login.AbstractLogin.LoginEvent;
 import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -30,7 +31,7 @@ import java.net.http.HttpResponse;
  */
 @Route(value = "login-form", layout = MainView.class)
 @PageTitle("Login Form")
-public class LoginFormView extends HorizontalLayout {
+public class LoginFormView extends Div {
 
     private Button loginButton = new Button("Login");
 
@@ -45,7 +46,7 @@ public class LoginFormView extends HorizontalLayout {
     private ObjectMapper mapper = new ObjectMapper();
     
     public LoginFormView() {
-
+        
         loginButton.setVisible(true);
         logoutButton.setVisible(false);
         

@@ -5,9 +5,11 @@
  */
 package com.example.homework.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import javax.persistence.Entity;
 
 @Entity
+@JsonTypeName("Professor")
 public class Professor extends Usuario{
 
     private String departamento;

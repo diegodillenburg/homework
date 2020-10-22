@@ -1,7 +1,6 @@
 
 package com.example.homework.data.service;
 
-import com.example.homework.data.entity.Auth;
 import com.example.homework.data.entity.Usuario;
 import com.example.homework.request.HttpRequestClass;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -39,15 +38,11 @@ public class UsuarioService extends CrudService<Usuario, Integer> {
         user.setLogin(login);
         user.setSenha(senha);
         
-        Auth auth = new Auth();
-        auth.setUsername(login);
-        auth.setPassword(senha);
-        
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
         
         try {
-             json = mapper.writeValueAsString(auth);
+             json = mapper.writeValueAsString(user);
              System.out.println("ResultingJSONstring = " + json);
              //System.out.println(json);
          } catch (JsonProcessingException e) {

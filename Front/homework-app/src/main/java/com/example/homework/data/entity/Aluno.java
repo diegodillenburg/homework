@@ -5,10 +5,12 @@
  */
 package com.example.homework.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
 import javax.persistence.*;
 
 @Entity
+@JsonTypeName("Aluno")
 public class Aluno extends Usuario{
     
     private String periodo;
